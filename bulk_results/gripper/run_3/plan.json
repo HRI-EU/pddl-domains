@@ -1,0 +1,56 @@
+[
+    {
+        "action": "pickup",
+        "args": [
+            "room1",
+            "ball1",
+            "robot1",
+            "leftarm"
+        ],
+        "cost": "1",
+        "raw": "pickup room1 ball1 robot1 leftarm (1)"
+    },
+    {
+        "action": "pickup",
+        "args": [
+            "room1",
+            "ball2",
+            "robot1",
+            "rightarm"
+        ],
+        "cost": "1",
+        "raw": "pickup room1 ball2 robot1 rightarm (1)"
+    },
+    {
+        "action": "move",
+        "args": [
+            "room1",
+            "robot1",
+            "room2"
+        ],
+        "cost": "1",
+        "raw": "move room1 robot1 room2 (1)"
+    },
+    {
+        "action": "drop",
+        "args": [
+            "leftarm",
+            "ball1",
+            "room2",
+            "robot1"
+        ],
+        "cost": "1",
+        "raw": "drop leftarm ball1 room2 robot1 (1)"
+    },
+    {
+        "action": "drop",
+        "args": [
+            "rightarm",
+            "ball2",
+            "room2",
+            "robot1"
+        ],
+        "cost": "1",
+        "raw": "drop rightarm ball2 room2 robot1 (1)"
+    }
+]

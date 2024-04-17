@@ -1,0 +1,100 @@
+[
+    {
+        "action": "navigate",
+        "args": [
+            "diningtable",
+            "sidetable"
+        ],
+        "cost": "1",
+        "raw": "navigate diningtable sidetable (1)"
+    },
+    {
+        "action": "pickup",
+        "args": [
+            "sidetable",
+            "bowl",
+            "empty"
+        ],
+        "cost": "1",
+        "raw": "pickup sidetable bowl empty (1)"
+    },
+    {
+        "action": "navigate",
+        "args": [
+            "sidetable",
+            "diningtable"
+        ],
+        "cost": "1",
+        "raw": "navigate sidetable diningtable (1)"
+    },
+    {
+        "action": "place",
+        "args": [
+            "bowl",
+            "diningtable",
+            "empty"
+        ],
+        "cost": "1",
+        "raw": "place bowl diningtable empty (1)"
+    },
+    {
+        "action": "pickup",
+        "args": [
+            "diningtable",
+            "apple",
+            "empty"
+        ],
+        "cost": "1",
+        "raw": "pickup diningtable apple empty (1)"
+    },
+    {
+        "action": "putin",
+        "args": [
+            "apple",
+            "bowl",
+            "empty"
+        ],
+        "cost": "1",
+        "raw": "putin apple bowl empty (1)"
+    },
+    {
+        "action": "pickup",
+        "args": [
+            "diningtable",
+            "banana",
+            "empty"
+        ],
+        "cost": "1",
+        "raw": "pickup diningtable banana empty (1)"
+    },
+    {
+        "action": "putin",
+        "args": [
+            "banana",
+            "bowl",
+            "empty"
+        ],
+        "cost": "1",
+        "raw": "putin banana bowl empty (1)"
+    },
+    {
+        "action": "pickup",
+        "args": [
+            "diningtable",
+            "cloth",
+            "empty"
+        ],
+        "cost": "1",
+        "raw": "pickup diningtable cloth empty (1)"
+    },
+    {
+        "action": "putin",
+        "args": [
+            "cloth",
+            "lunchbox",
+            "empty"
+        ],
+        "cost": "1",
+        "raw": "putin cloth lunchbox empty (1)"
+    }
+]

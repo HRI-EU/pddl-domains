@@ -1,0 +1,11 @@
+[
+    {
+        "action": "bakepizza",
+        "args": [
+            "oven",
+            "plate"
+        ],
+        "cost": "1",
+        "raw": "bakepizza oven plate (1)"
+    }
+]

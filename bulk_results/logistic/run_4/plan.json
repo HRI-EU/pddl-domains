@@ -1,0 +1,46 @@
+[
+    {
+        "action": "loadplane",
+        "args": [
+            "package2",
+            "locationb2",
+            "plane2",
+            "cityb"
+        ],
+        "cost": "1",
+        "raw": "loadplane package2 locationb2 plane2 cityb (1)"
+    },
+    {
+        "action": "unloadplane",
+        "args": [
+            "plane2",
+            "package2",
+            "cityb",
+            "locationa2"
+        ],
+        "cost": "1",
+        "raw": "unloadplane plane2 package2 cityb locationa2 (1)"
+    },
+    {
+        "action": "loadplane",
+        "args": [
+            "package1",
+            "locationa2",
+            "plane2",
+            "cityb"
+        ],
+        "cost": "1",
+        "raw": "loadplane package1 locationa2 plane2 cityb (1)"
+    },
+    {
+        "action": "unloadplane",
+        "args": [
+            "plane2",
+            "package1",
+            "cityb",
+            "locationb2"
+        ],
+        "cost": "1",
+        "raw": "unloadplane plane2 package1 cityb locationb2 (1)"
+    }
+]

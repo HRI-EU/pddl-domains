@@ -1,0 +1,20 @@
+[
+    {
+        "action": "preparedough",
+        "args": [
+            "dough",
+            "table"
+        ],
+        "cost": "1",
+        "raw": "preparedough dough table (1)"
+    },
+    {
+        "action": "bake",
+        "args": [
+            "oven",
+            "dough"
+        ],
+        "cost": "1",
+        "raw": "bake oven dough (1)"
+    }
+]

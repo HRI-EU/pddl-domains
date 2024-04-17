@@ -1,0 +1,96 @@
+[
+    {
+        "action": "drive",
+        "args": [
+            "truckb",
+            "locationb1",
+            "cityb",
+            "locationb2"
+        ],
+        "cost": "1",
+        "raw": "drive truckb locationb1 cityb locationb2 (1)"
+    },
+    {
+        "action": "drive",
+        "args": [
+            "trucka",
+            "locationa1",
+            "citya",
+            "locationa2"
+        ],
+        "cost": "1",
+        "raw": "drive trucka locationa1 citya locationa2 (1)"
+    },
+    {
+        "action": "fly",
+        "args": [
+            "plane1",
+            "locationa1",
+            "locationa2"
+        ],
+        "cost": "1",
+        "raw": "fly plane1 locationa1 locationa2 (1)"
+    },
+    {
+        "action": "loadontoplane",
+        "args": [
+            "package1",
+            "locationa2",
+            "plane1"
+        ],
+        "cost": "1",
+        "raw": "loadontoplane package1 locationa2 plane1 (1)"
+    },
+    {
+        "action": "fly",
+        "args": [
+            "plane1",
+            "locationa2",
+            "locationb2"
+        ],
+        "cost": "1",
+        "raw": "fly plane1 locationa2 locationb2 (1)"
+    },
+    {
+        "action": "unloadfromplane",
+        "args": [
+            "package1",
+            "plane1",
+            "locationb2",
+            "truckb"
+        ],
+        "cost": "1",
+        "raw": "unloadfromplane package1 plane1 locationb2 truckb (1)"
+    },
+    {
+        "action": "loadontoplane",
+        "args": [
+            "package2",
+            "locationb2",
+            "plane1"
+        ],
+        "cost": "1",
+        "raw": "loadontoplane package2 locationb2 plane1 (1)"
+    },
+    {
+        "action": "fly",
+        "args": [
+            "plane1",
+            "locationb2",
+            "locationa2"
+        ],
+        "cost": "1",
+        "raw": "fly plane1 locationb2 locationa2 (1)"
+    },
+    {
+        "action": "unloadfromplane",
+        "args": [
+            "package2",
+            "plane1",
+            "locationa2",
+            "trucka"
+        ],
+        "cost": "1",
+        "raw": "unloadfromplane package2 plane1 locationa2 trucka (1)"
+    }
+]

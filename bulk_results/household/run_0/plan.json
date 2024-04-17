@@ -1,0 +1,92 @@
+[
+    {
+        "action": "pick",
+        "args": [
+            "robot1",
+            "kitchencounterloc",
+            "apple"
+        ],
+        "cost": "1",
+        "raw": "pick robot1 kitchencounterloc apple (1)"
+    },
+    {
+        "action": "navigate",
+        "args": [
+            "robot1",
+            "kitchencounterloc",
+            "drawerloc"
+        ],
+        "cost": "1",
+        "raw": "navigate robot1 kitchencounterloc drawerloc (1)"
+    },
+    {
+        "action": "pickreceptacle",
+        "args": [
+            "robot1",
+            "drawerloc",
+            "lunchboxreceptacle"
+        ],
+        "cost": "1",
+        "raw": "pickreceptacle robot1 drawerloc lunchboxreceptacle (1)"
+    },
+    {
+        "action": "navigate",
+        "args": [
+            "robot1",
+            "drawerloc",
+            "diningtableloc"
+        ],
+        "cost": "1",
+        "raw": "navigate robot1 drawerloc diningtableloc (1)"
+    },
+    {
+        "action": "pick",
+        "args": [
+            "robot1",
+            "diningtableloc",
+            "cloth"
+        ],
+        "cost": "1",
+        "raw": "pick robot1 diningtableloc cloth (1)"
+    },
+    {
+        "action": "placeinside",
+        "args": [
+            "robot1",
+            "apple",
+            "lunchboxreceptacle"
+        ],
+        "cost": "1",
+        "raw": "placeinside robot1 apple lunchboxreceptacle (1)"
+    },
+    {
+        "action": "placereceptacle",
+        "args": [
+            "robot1",
+            "lunchboxreceptacle",
+            "diningtableloc"
+        ],
+        "cost": "1",
+        "raw": "placereceptacle robot1 lunchboxreceptacle diningtableloc (1)"
+    },
+    {
+        "action": "navigate",
+        "args": [
+            "robot1",
+            "diningtableloc",
+            "kitchencounterloc"
+        ],
+        "cost": "1",
+        "raw": "navigate robot1 diningtableloc kitchencounterloc (1)"
+    },
+    {
+        "action": "place",
+        "args": [
+            "robot1",
+            "cloth",
+            "kitchencounterloc"
+        ],
+        "cost": "1",
+        "raw": "place robot1 cloth kitchencounterloc (1)"
+    }
+]

@@ -1,0 +1,57 @@
+(define (domain tyreworld)
+    (:requirements :disjunctive-preconditions :equality :existential-preconditions :strips :typing)
+    (:types CONTAINER HUB LOCATION NUT ROBOT TOOL WHEEL boot car_side flat_tyre front_hub jack nut pump robot spare_tyre wrench)
+    (:predicates 
+    (isAt ?robot - ROBOT ?location - LOCATION)  
+    (isJackedUp ?robot - ROBOT)  
+    (isLoose ?nut - NUT)  
+    (isOnHub ?wheel - WHEEL ?hub - HUB)  
+    (isSecuredBy ?wheel - WHEEL ?nut - NUT)  
+    (toolIsInContainer ?tool - TOOL ?container - CONTAINER)  
+    (wheelIsInContainer ?wheel - WHEEL ?container - CONTAINER))
+    (:action attachTyre
+        :parameters (?wheel - WHEEL ?hub - HUB ?robot - ROBOT ?location - LOCATION)
+        :precondition (and (not (isOnHub ?wheel ?hub)) (isAt ?robot ?location))
+        :effect (isOnHub ?wheel ?hub)
+    )
+     (:action doUpNut
+        :parameters (?wheel - WHEEL ?nut - NUT ?robot - ROBOT ?location - LOCATION)
+        :precondition (and (not (isSecuredBy ?wheel ?nut)) (isAt ?robot ?location))
+        :effect (isSecuredBy ?wheel ?nut)
+    )
+     (:action fetch
+        :parameters (?tool - TOOL ?container - CONTAINER ?robot - ROBOT ?location - LOCATION)
+        :precondition (and (toolIsInContainer ?tool ?container) (isAt ?robot ?location))
+        :effect (not (toolIsInContainer ?tool ?container))
+    )
+     (:action jackDown
+        :parameters (?robot - ROBOT)
+        :precondition (isJackedUp ?robot)
+        :effect (not (isJackedUp ?robot))
+    )
+     (:action jackUp
+        :parameters (?robot - ROBOT ?location - LOCATION)
+        :precondition (and (not (isJackedUp ?robot)) (isAt ?robot ?location))
+        :effect (isJackedUp ?robot)
+    )
+     (:action removeTyre
+        :parameters (?wheel - WHEEL ?hub - HUB ?robot - ROBOT ?nut - NUT)
+        :precondition (and (isOnHub ?wheel ?hub) (isJackedUp ?robot) (isLoose ?nut))
+        :effect (and (not (isOnHub ?wheel ?hub)) (not (isLoose ?nut)))
+    )
+     (:action storeTools
+        :parameters (?robot - ROBOT ?location - LOCATION ?tool - TOOL ?container - CONTAINER)
+        :precondition (isAt ?robot ?location)
+        :effect (toolIsInContainer ?tool ?container)
+    )
+     (:action storeTyre
+        :parameters (?robot - ROBOT ?location - LOCATION ?wheel - WHEEL ?container - CONTAINER)
+        :precondition (isAt ?robot ?location)
+        :effect (wheelIsInContainer ?wheel ?container)
+    )
+     (:action undoNut
+        :parameters (?wheel - WHEEL ?nut - NUT ?robot - ROBOT ?location - LOCATION)
+        :precondition (and (isSecuredBy ?wheel ?nut) (not (isJackedUp ?robot)) (isAt ?robot ?location))
+        :effect (and (not (isSecuredBy ?wheel ?nut)) (isLoose ?nut))
+    )
+)

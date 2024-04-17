@@ -1,0 +1,35 @@
+[
+    {
+        "action": "storetyre",
+        "args": [
+            "robot",
+            "car_side",
+            "flat_tyre",
+            "boot"
+        ],
+        "cost": "1",
+        "raw": "storetyre robot car_side flat_tyre boot (1)"
+    },
+    {
+        "action": "doupnut",
+        "args": [
+            "spare_tyre",
+            "nut",
+            "robot",
+            "car_side"
+        ],
+        "cost": "1",
+        "raw": "doupnut spare_tyre nut robot car_side (1)"
+    },
+    {
+        "action": "attachtyre",
+        "args": [
+            "spare_tyre",
+            "front_hub",
+            "robot",
+            "car_side"
+        ],
+        "cost": "1",
+        "raw": "attachtyre spare_tyre front_hub robot car_side (1)"
+    }
+]

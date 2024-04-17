@@ -1,0 +1,33 @@
+[
+    {
+        "action": "pickup",
+        "args": [
+            "robot",
+            "diningtable",
+            "apple"
+        ],
+        "cost": "1",
+        "raw": "pickup robot diningtable apple (1)"
+    },
+    {
+        "action": "cleanwith",
+        "args": [
+            "robot",
+            "diningtable",
+            "apple"
+        ],
+        "cost": "1",
+        "raw": "cleanwith robot diningtable apple (1)"
+    },
+    {
+        "action": "putinreceptacle",
+        "args": [
+            "robot",
+            "diningtable",
+            "apple",
+            "lunchbox"
+        ],
+        "cost": "1",
+        "raw": "putinreceptacle robot diningtable apple lunchbox (1)"
+    }
+]

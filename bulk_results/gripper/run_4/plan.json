@@ -1,0 +1,98 @@
+[
+    {
+        "action": "pickup",
+        "args": [
+            "robot1",
+            "room1",
+            "ball1",
+            "leftarm"
+        ],
+        "cost": "1",
+        "raw": "pickup robot1 room1 ball1 leftarm (1)"
+    },
+    {
+        "action": "move",
+        "args": [
+            "robot1",
+            "room1",
+            "room2"
+        ],
+        "cost": "1",
+        "raw": "move robot1 room1 room2 (1)"
+    },
+    {
+        "action": "drop",
+        "args": [
+            "robot1",
+            "room2",
+            "leftarm",
+            "ball1"
+        ],
+        "cost": "1",
+        "raw": "drop robot1 room2 leftarm ball1 (1)"
+    },
+    {
+        "action": "move",
+        "args": [
+            "robot1",
+            "room2",
+            "room1"
+        ],
+        "cost": "1",
+        "raw": "move robot1 room2 room1 (1)"
+    },
+    {
+        "action": "pickup",
+        "args": [
+            "robot1",
+            "room1",
+            "ball2",
+            "leftarm"
+        ],
+        "cost": "1",
+        "raw": "pickup robot1 room1 ball2 leftarm (1)"
+    },
+    {
+        "action": "pickup",
+        "args": [
+            "robot1",
+            "room1",
+            "ball3",
+            "rightarm"
+        ],
+        "cost": "1",
+        "raw": "pickup robot1 room1 ball3 rightarm (1)"
+    },
+    {
+        "action": "move",
+        "args": [
+            "robot1",
+            "room1",
+            "room2"
+        ],
+        "cost": "1",
+        "raw": "move robot1 room1 room2 (1)"
+    },
+    {
+        "action": "drop",
+        "args": [
+            "robot1",
+            "room2",
+            "leftarm",
+            "ball2"
+        ],
+        "cost": "1",
+        "raw": "drop robot1 room2 leftarm ball2 (1)"
+    },
+    {
+        "action": "drop",
+        "args": [
+            "robot1",
+            "room2",
+            "rightarm",
+            "ball3"
+        ],
+        "cost": "1",
+        "raw": "drop robot1 room2 rightarm ball3 (1)"
+    }
+]

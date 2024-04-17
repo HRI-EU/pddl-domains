@@ -1,0 +1,36 @@
+(define (domain logistic)
+    (:requirements :disjunctive-preconditions :equality :existential-preconditions :strips :typing)
+    (:types CITY CityA CityB LOCATION LocationA1 LocationA2 LocationB1 LocationB2 PACKAGE PLANE Package1 Package2 Plane1 TRUCK TruckA TruckB)
+    (:predicates 
+    (atPackage ?Package - PACKAGE ?Location - LOCATION)  
+    (atPlane ?Plane - PLANE ?Location - LOCATION)  
+    (atTruck ?Truck - TRUCK ?Location - LOCATION)  
+    (inCity ?From - LOCATION ?City - CITY)  
+    (insidePlane ?Package - PACKAGE ?Plane - PLANE)  
+    (insideTruck ?Package - PACKAGE ?Truck - TRUCK))
+    (:action drive
+        :parameters (?Truck - TRUCK ?From - LOCATION ?City - CITY ?To - LOCATION)
+        :precondition (and (atTruck ?Truck ?From) (inCity ?From ?City) (inCity ?To ?City))
+        :effect (and (not (atTruck ?Truck ?From)) (atTruck ?Truck ?To))
+    )
+     (:action fly
+        :parameters (?Plane - PLANE ?From - LOCATION ?To - LOCATION)
+        :precondition (atPlane ?Plane ?From)
+        :effect (and (not (atPlane ?Plane ?From)) (atPlane ?Plane ?To))
+    )
+     (:action load
+        :parameters (?Package - PACKAGE ?Location - LOCATION ?Truck - TRUCK)
+        :precondition (and (atPackage ?Package ?Location) (atTruck ?Truck ?Location))
+        :effect (and (not (atPackage ?Package ?Location)) (insideTruck ?Package ?Truck))
+    )
+     (:action loadOntoPlane
+        :parameters (?Package - PACKAGE ?Location - LOCATION ?Plane - PLANE)
+        :precondition (and (atPackage ?Package ?Location) (atPlane ?Plane ?Location))
+        :effect (and (not (atPackage ?Package ?Location)) (insidePlane ?Package ?Plane))
+    )
+     (:action unloadFromPlane
+        :parameters (?Package - PACKAGE ?Plane - PLANE ?Location - LOCATION ?Truck - TRUCK)
+        :precondition (and (insidePlane ?Package ?Plane) (atPlane ?Plane ?Location) (atTruck ?Truck ?Location))
+        :effect (and (not (insidePlane ?Package ?Plane)) (atPackage ?Package ?Location))
+    )
+)

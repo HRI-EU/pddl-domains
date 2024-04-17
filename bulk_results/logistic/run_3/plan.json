@@ -1,0 +1,62 @@
+[
+    {
+        "action": "loadtruck",
+        "args": [
+            "package2",
+            "loc3",
+            "truck2"
+        ],
+        "cost": "1",
+        "raw": "loadtruck package2 loc3 truck2 (1)"
+    },
+    {
+        "action": "drive",
+        "args": [
+            "truck2",
+            "loc3",
+            "loc2"
+        ],
+        "cost": "1",
+        "raw": "drive truck2 loc3 loc2 (1)"
+    },
+    {
+        "action": "unloadtruck",
+        "args": [
+            "package2",
+            "truck2",
+            "loc2"
+        ],
+        "cost": "1",
+        "raw": "unloadtruck package2 truck2 loc2 (1)"
+    },
+    {
+        "action": "loadtruck",
+        "args": [
+            "package1",
+            "loc1",
+            "truck1"
+        ],
+        "cost": "1",
+        "raw": "loadtruck package1 loc1 truck1 (1)"
+    },
+    {
+        "action": "drive",
+        "args": [
+            "truck1",
+            "loc1",
+            "loc4"
+        ],
+        "cost": "1",
+        "raw": "drive truck1 loc1 loc4 (1)"
+    },
+    {
+        "action": "unloadtruck",
+        "args": [
+            "package1",
+            "truck1",
+            "loc4"
+        ],
+        "cost": "1",
+        "raw": "unloadtruck package1 truck1 loc4 (1)"
+    }
+]

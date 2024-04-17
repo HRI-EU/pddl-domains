@@ -1,0 +1,11 @@
+[
+    {
+        "action": "bake",
+        "args": [
+            "oven",
+            "pizzadough"
+        ],
+        "cost": "1",
+        "raw": "bake oven pizzadough (1)"
+    }
+]

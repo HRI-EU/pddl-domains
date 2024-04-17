@@ -1,0 +1,20 @@
+[
+    {
+        "action": "transfertooven",
+        "args": [
+            "oven",
+            "pizza"
+        ],
+        "cost": "1",
+        "raw": "transfertooven oven pizza (1)"
+    },
+    {
+        "action": "bakepizza",
+        "args": [
+            "pizza",
+            "oven"
+        ],
+        "cost": "1",
+        "raw": "bakepizza pizza oven (1)"
+    }
+]

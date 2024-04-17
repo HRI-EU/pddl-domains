@@ -1,0 +1,42 @@
+[
+    {
+        "action": "loadtruck",
+        "args": [
+            "package2",
+            "location1",
+            "trucka"
+        ],
+        "cost": "1",
+        "raw": "loadtruck package2 location1 trucka (1)"
+    },
+    {
+        "action": "unloadtruck",
+        "args": [
+            "package2",
+            "trucka",
+            "location3"
+        ],
+        "cost": "1",
+        "raw": "unloadtruck package2 trucka location3 (1)"
+    },
+    {
+        "action": "loadtruck",
+        "args": [
+            "package1",
+            "location2",
+            "trucka"
+        ],
+        "cost": "1",
+        "raw": "loadtruck package1 location2 trucka (1)"
+    },
+    {
+        "action": "unloadtruck",
+        "args": [
+            "package1",
+            "trucka",
+            "location4"
+        ],
+        "cost": "1",
+        "raw": "unloadtruck package1 trucka location4 (1)"
+    }
+]

@@ -1,0 +1,57 @@
+(define (domain tyreworld)
+    (:requirements :disjunctive-preconditions :equality :existential-preconditions :strips :typing)
+    (:types CONTAINER HUB LOCATION NUT ROBOT SMALL_OBJECT TOOL WHEEL bootContainer carSide flatTyreSmall flatTyreWheel hubObject jackSmall jackTool nutObject nutSmall pumpSmall pumpTool robot spareTyreSmall spareTyreWheel wrenchSmall wrenchTool)
+    (:predicates 
+    (attachedTyre ?hub - HUB ?wheel - WHEEL)  
+    (holdingSmallObject ?robot - ROBOT ?smallObject - SMALL_OBJECT)  
+    (holdingTool ?robot - ROBOT ?wrench - TOOL)  
+    (inContainer ?smallObject - SMALL_OBJECT ?container - CONTAINER)  
+    (isAt ?robot - ROBOT ?toLocation - LOCATION)  
+    (isLifted ?location - LOCATION)  
+    (securedNut ?hub - HUB ?nut - NUT))
+    (:action attachTyre
+        :parameters (?location - LOCATION ?robot - ROBOT ?smallObject - SMALL_OBJECT ?hub - HUB ?wheel - WHEEL)
+        :precondition (and (isLifted ?location) (holdingSmallObject ?robot ?smallObject) (not (attachedTyre ?hub ?wheel)))
+        :effect (and (attachedTyre ?hub ?wheel) (not (holdingSmallObject ?robot ?smallObject)))
+    )
+     (:action doUpNut
+        :parameters (?robot - ROBOT ?wrench - TOOL ?hub - HUB ?wheel - WHEEL ?nut - NUT)
+        :precondition (and (holdingTool ?robot ?wrench) (attachedTyre ?hub ?wheel))
+        :effect (securedNut ?hub ?nut)
+    )
+     (:action fetch
+        :parameters (?smallObject - SMALL_OBJECT ?container - CONTAINER ?robot - ROBOT)
+        :precondition (inContainer ?smallObject ?container)
+        :effect (and (holdingSmallObject ?robot ?smallObject) (not (inContainer ?smallObject ?container)))
+    )
+     (:action lowerJack
+        :parameters (?location - LOCATION ?robot - ROBOT ?jack - TOOL)
+        :precondition (and (isLifted ?location) (holdingTool ?robot ?jack))
+        :effect (not (isLifted ?location))
+    )
+     (:action move
+        :parameters (?robot - ROBOT ?toLocation - LOCATION)
+        :precondition (not (isAt ?robot ?toLocation))
+        :effect (isAt ?robot ?toLocation)
+    )
+     (:action removeTyre
+        :parameters (?location - LOCATION ?hub - HUB ?nut - NUT ?wheel - WHEEL)
+        :precondition (and (isLifted ?location) (not (securedNut ?hub ?nut)) (attachedTyre ?hub ?wheel))
+        :effect (not (attachedTyre ?hub ?wheel))
+    )
+     (:action returnToBoot
+        :parameters (?robot - ROBOT ?smallObject - SMALL_OBJECT ?container - CONTAINER)
+        :precondition (holdingSmallObject ?robot ?smallObject)
+        :effect (and (not (holdingSmallObject ?robot ?smallObject)) (inContainer ?smallObject ?container))
+    )
+     (:action undoNut
+        :parameters (?robot - ROBOT ?wrench - TOOL ?hub - HUB ?nut - NUT)
+        :precondition (and (holdingTool ?robot ?wrench) (securedNut ?hub ?nut))
+        :effect (not (securedNut ?hub ?nut))
+    )
+     (:action useJack
+        :parameters (?robot - ROBOT ?jack - TOOL ?location - LOCATION)
+        :precondition (and (holdingTool ?robot ?jack) (not (isLifted ?location)))
+        :effect (isLifted ?location)
+    )
+)

@@ -1,0 +1,42 @@
+[
+    {
+        "action": "drive",
+        "args": [
+            "locationb1",
+            "truckb",
+            "locationb2"
+        ],
+        "cost": "1",
+        "raw": "drive locationb1 truckb locationb2 (1)"
+    },
+    {
+        "action": "loadtruck",
+        "args": [
+            "locationb2",
+            "package2",
+            "truckb"
+        ],
+        "cost": "1",
+        "raw": "loadtruck locationb2 package2 truckb (1)"
+    },
+    {
+        "action": "drive",
+        "args": [
+            "locationb2",
+            "truckb",
+            "locationb1"
+        ],
+        "cost": "1",
+        "raw": "drive locationb2 truckb locationb1 (1)"
+    },
+    {
+        "action": "unloadlocation",
+        "args": [
+            "package2",
+            "truckb",
+            "locationb1"
+        ],
+        "cost": "1",
+        "raw": "unloadlocation package2 truckb locationb1 (1)"
+    }
+]

@@ -1,0 +1,40 @@
+(define (domain logistic)
+    (:requirements :disjunctive-preconditions :equality :existential-preconditions :strips :typing)
+    (:types CITY CityA CityB LOCATION LocationA1 LocationA2 LocationB1 LocationB2 PACKAGE PLANE Package1 Package2 Plane1 Plane2 TRUCK TruckA TruckB)
+    (:predicates 
+    (atLocation ?package - PACKAGE ?location - LOCATION)  
+    (atPlaneCity ?plane - PLANE ?city - CITY)  
+    (atTruckCityLocation ?truck - TRUCK ?city - CITY ?location - LOCATION)  
+    (containsPlane ?plane - PLANE ?package - PACKAGE)  
+    (containsTruck ?truck - TRUCK ?package - PACKAGE))
+    (:action driveTruck
+        :parameters (?truck - TRUCK ?city - CITY ?fromLocation - LOCATION ?toLocation - LOCATION)
+        :precondition (atTruckCityLocation ?truck ?city ?fromLocation)
+        :effect (and (not (atTruckCityLocation ?truck ?city ?fromLocation)) (atTruckCityLocation ?truck ?city ?toLocation))
+    )
+     (:action flyPlane
+        :parameters (?plane - PLANE ?fromCity - CITY ?toCity - CITY)
+        :precondition (atPlaneCity ?plane ?fromCity)
+        :effect (and (not (atPlaneCity ?plane ?fromCity)) (atPlaneCity ?plane ?toCity))
+    )
+     (:action loadPlane
+        :parameters (?package - PACKAGE ?location - LOCATION ?plane - PLANE ?city - CITY)
+        :precondition (and (atLocation ?package ?location) (atPlaneCity ?plane ?city))
+        :effect (and (not (atLocation ?package ?location)) (containsPlane ?plane ?package))
+    )
+     (:action loadTruck
+        :parameters (?package - PACKAGE ?location - LOCATION ?truck - TRUCK ?city - CITY)
+        :precondition (and (atLocation ?package ?location) (atTruckCityLocation ?truck ?city ?location))
+        :effect (and (not (atLocation ?package ?location)) (containsTruck ?truck ?package))
+    )
+     (:action unloadPlane
+        :parameters (?plane - PLANE ?package - PACKAGE ?city - CITY ?location - LOCATION)
+        :precondition (and (containsPlane ?plane ?package) (atPlaneCity ?plane ?city))
+        :effect (and (not (containsPlane ?plane ?package)) (atLocation ?package ?location))
+    )
+     (:action unloadTruck
+        :parameters (?truck - TRUCK ?package - PACKAGE ?city - CITY ?location - LOCATION)
+        :precondition (and (containsTruck ?truck ?package) (atTruckCityLocation ?truck ?city ?location))
+        :effect (and (not (containsTruck ?truck ?package)) (atLocation ?package ?location))
+    )
+)

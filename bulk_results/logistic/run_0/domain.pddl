@@ -1,0 +1,36 @@
+(define (domain logistic)
+    (:requirements :disjunctive-preconditions :equality :existential-preconditions :strips :typing)
+    (:types AIRPORT AirportA AirportB CITY CityA CityB LOCATION Location1 Location2 Location3 Location4 PACKAGE PLANE Package1 Package2 Plane1 TRUCK TruckA TruckB)
+    (:predicates 
+    (atLocation ?Package - PACKAGE ?Location - LOCATION)  
+    (atTruck ?Truck - TRUCK ?FromLocation - LOCATION)  
+    (inPlane ?Package - PACKAGE ?Plane - PLANE)  
+    (inTruck ?Package - PACKAGE ?Truck - TRUCK)  
+    (planeAtAirport ?Plane - PLANE ?Airport - AIRPORT)  
+    (truckAtAirport ?Truck - TRUCK ?Airport - AIRPORT))
+    (:action drive
+        :parameters (?Truck - TRUCK ?FromLocation - LOCATION ?ToLocation - LOCATION)
+        :precondition (atTruck ?Truck ?FromLocation)
+        :effect (and (not (atTruck ?Truck ?FromLocation)) (atTruck ?Truck ?ToLocation))
+    )
+     (:action fly
+        :parameters (?Plane - PLANE ?FromAirport - AIRPORT ?ToAirport - AIRPORT)
+        :precondition (planeAtAirport ?Plane ?FromAirport)
+        :effect (and (not (planeAtAirport ?Plane ?FromAirport)) (planeAtAirport ?Plane ?ToAirport))
+    )
+     (:action loadPlane
+        :parameters (?Package - PACKAGE ?Truck - TRUCK ?Plane - PLANE ?Airport - AIRPORT)
+        :precondition (and (inTruck ?Package ?Truck) (planeAtAirport ?Plane ?Airport) (truckAtAirport ?Truck ?Airport))
+        :effect (and (not (inTruck ?Package ?Truck)) (inPlane ?Package ?Plane))
+    )
+     (:action loadTruck
+        :parameters (?Package - PACKAGE ?Location - LOCATION ?Truck - TRUCK)
+        :precondition (and (atLocation ?Package ?Location) (not (inTruck ?Package ?Truck)))
+        :effect (and (not (atLocation ?Package ?Location)) (inTruck ?Package ?Truck))
+    )
+     (:action unloadTruck
+        :parameters (?Package - PACKAGE ?Truck - TRUCK ?Location - LOCATION)
+        :precondition (inTruck ?Package ?Truck)
+        :effect (and (not (inTruck ?Package ?Truck)) (atLocation ?Package ?Location))
+    )
+)

@@ -1,0 +1,22 @@
+[
+    {
+        "action": "pickup",
+        "args": [
+            "apple",
+            "diningtable",
+            "robot"
+        ],
+        "cost": "1",
+        "raw": "pickup apple diningtable robot (1)"
+    },
+    {
+        "action": "placein",
+        "args": [
+            "robot",
+            "bowl",
+            "apple"
+        ],
+        "cost": "1",
+        "raw": "placein robot bowl apple (1)"
+    }
+]

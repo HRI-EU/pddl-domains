@@ -1,0 +1,62 @@
+[
+    {
+        "action": "chooseliquid",
+        "args": [
+            "olive_oil"
+        ],
+        "cost": "1",
+        "raw": "chooseliquid olive_oil (1)"
+    },
+    {
+        "action": "choosesolid",
+        "args": [
+            "basilicum"
+        ],
+        "cost": "1",
+        "raw": "choosesolid basilicum (1)"
+    },
+    {
+        "action": "addliquidtodough",
+        "args": [
+            "olive_oil",
+            "pizza_dough"
+        ],
+        "cost": "1",
+        "raw": "addliquidtodough olive_oil pizza_dough (1)"
+    },
+    {
+        "action": "addsolidtodough",
+        "args": [
+            "basilicum",
+            "pizza_dough"
+        ],
+        "cost": "1",
+        "raw": "addsolidtodough basilicum pizza_dough (1)"
+    },
+    {
+        "action": "placeinoven",
+        "args": [
+            "pizza_dough",
+            "oven"
+        ],
+        "cost": "1",
+        "raw": "placeinoven pizza_dough oven (1)"
+    },
+    {
+        "action": "bakepizza",
+        "args": [
+            "oven",
+            "pizza_dough"
+        ],
+        "cost": "1",
+        "raw": "bakepizza oven pizza_dough (1)"
+    },
+    {
+        "action": "takeoutpizza",
+        "args": [
+            "pizza_dough"
+        ],
+        "cost": "1",
+        "raw": "takeoutpizza pizza_dough (1)"
+    }
+]

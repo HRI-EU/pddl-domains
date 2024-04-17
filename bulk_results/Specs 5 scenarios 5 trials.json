@@ -1,0 +1,3102 @@
+{
+  "Gripper": [
+    {
+      "Objects": {
+        "ROOM": [
+          "Room1",
+          "Room2"
+        ],
+        "BALL": [
+          "Ball1",
+          "Ball2",
+          "Ball3"
+        ],
+        "ARM": [
+          "Arm1",
+          "Arm2"
+        ],
+        "ROBOT": [
+          "Robot"
+        ]
+      },
+      "Predicates": [
+        "actorIsIn(ROOM, ROBOT)",
+        "isEmpty(ARM)",
+        "objectIsIn(ROOM, BALL)",
+        "isHolding(ARM, BALL)"
+      ],
+      "Actions": [
+        {
+          "action": "move(robot: ROBOT, fromRoom: ROOM, toRoom: ROOM)",
+          "description": "Robot moves from one room to another.",
+          "preconditions": [
+            "actorIsIn(fromRoom, robot)"
+          ],
+          "effects": [
+            "!actorIsIn(fromRoom, robot)",
+            "actorIsIn(toRoom, robot)"
+          ]
+        },
+        {
+          "action": "pickup(robot: ROBOT, ball: BALL, arm: ARM, room: ROOM)",
+          "description": "Robot picks up a ball with a free arm in a room.",
+          "preconditions": [
+            "actorIsIn(room, robot)",
+            "objectIsIn(room, ball)",
+            "isEmpty(arm)"
+          ],
+          "effects": [
+            "!isEmpty(arm)",
+            "!objectIsIn(room, ball)",
+            "isHolding(arm, ball)"
+          ]
+        },
+        {
+          "action": "drop(robot: ROBOT, ball: BALL, arm: ARM, room: ROOM)",
+          "description": "Robot drops a ball from its arm in a room.",
+          "preconditions": [
+            "actorIsIn(room, robot)",
+            "isHolding(arm, ball)"
+          ],
+          "effects": [
+            "isEmpty(arm)",
+            "objectIsIn(room, ball)",
+            "!isHolding(arm, ball)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "actorIsIn(Room1, Robot)",
+        "objectIsIn(Room1, Ball1)",
+        "objectIsIn(Room1, Ball2)",
+        "objectIsIn(Room1, Ball3)",
+        "isEmpty(Arm1)",
+        "isEmpty(Arm2)"
+      ],
+      "GoalStates": [
+        "objectIsIn(Room2, Ball1)",
+        "objectIsIn(Room2, Ball2)",
+        "objectIsIn(Room2, Ball3)"
+      ],
+      "Plan": [
+        "move(Robot, Room1, Room2)",
+        "pickup(Robot, Ball1, Arm1, Room1)",
+        "move(Robot, Room1, Room2)",
+        "drop(Robot, Ball1, Arm1, Room2)",
+        "pickup(Robot, Ball2, Arm2, Room1)",
+        "move(Robot, Room1, Room2)",
+        "drop(Robot, Ball2, Arm2, Room2)",
+        "pickup(Robot, Ball3, Arm1, Room1)",
+        "move(Robot, Room1, Room2)",
+        "drop(Robot, Ball3, Arm1, Room2)"
+      ]
+    },
+    {
+      "Objects": {
+        "ROOM": [
+          "Room1",
+          "Room2"
+        ],
+        "ROBOT": [
+          "Robot1"
+        ],
+        "ARM": [
+          "FirstArm",
+          "SecondArm"
+        ],
+        "BALL": [
+          "Ball1",
+          "Ball2",
+          "Ball3"
+        ]
+      },
+      "Predicates": [
+        "objectIsInRoom(ROOM, BALL)",
+        "robotIsInRoom(ROOM, ROBOT)",
+        "isFree(ARM)",
+        "isHolding(ARM, BALL)"
+      ],
+      "Actions": [
+        {
+          "action": "pickUpBall(Ball: BALL, Arm: ARM, Room: ROOM, Robot: ROBOT)",
+          "description": "Robot picks up a ball in a room using a free arm.",
+          "preconditions": [
+            "objectIsInRoom(Room, Ball)",
+            "robotIsInRoom(Room, Robot)",
+            "isFree(Arm)",
+            "!isHolding(Arm, Ball)"
+          ],
+          "effects": [
+            "!isFree(Arm)",
+            "isHolding(Arm, Ball)"
+          ]
+        },
+        {
+          "action": "move(Robot: ROBOT, FromRoom: ROOM, ToRoom: ROOM)",
+          "description": "Robot moves from one room to another.",
+          "preconditions": [
+            "robotIsInRoom(FromRoom, Robot)"
+          ],
+          "effects": [
+            "!robotIsInRoom(FromRoom, Robot)",
+            "robotIsInRoom(ToRoom, Robot)"
+          ]
+        },
+        {
+          "action": "dropBall(Ball: BALL, Arm: ARM, Room: ROOM, Robot: ROBOT)",
+          "description": "Robot drops the ball in a room.",
+          "preconditions": [
+            "isHolding(Arm, Ball)",
+            "robotIsInRoom(Room, Robot)"
+          ],
+          "effects": [
+            "isFree(Arm)",
+            "!isHolding(Arm, Ball)",
+            "objectIsInRoom(Room, Ball)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "objectIsInRoom(Room1, Ball1)",
+        "objectIsInRoom(Room1, Ball2)",
+        "objectIsInRoom(Room1, Ball3)",
+        "robotIsInRoom(Room1, Robot1)",
+        "isFree(FirstArm)",
+        "isFree(SecondArm)"
+      ],
+      "GoalStates": [
+        "objectIsInRoom(Room2, Ball1)",
+        "objectIsInRoom(Room2, Ball2)",
+        "objectIsInRoom(Room2, Ball3)"
+      ],
+      "Plan": [
+        "pickUpBall(Ball1, FirstArm, Room1, Robot1)",
+        "move(Robot1, Room1, Room2)",
+        "dropBall(Ball1, FirstArm, Room2, Robot1)",
+        "move(Robot1, Room2, Room1)",
+        "pickUpBall(Ball2, FirstArm, Room1, Robot1)",
+        "move(Robot1, Room1, Room2)",
+        "dropBall(Ball2, FirstArm, Room2, Robot1)",
+        "move(Robot1, Room2, Room1)",
+        "pickUpBall(Ball3, FirstArm, Room1, Robot1)",
+        "move(Robot1, Room1, Room2)",
+        "dropBall(Ball3, FirstArm, Room2, Robot1)"
+      ]
+    },
+    {
+      "Objects": {
+        "ROOM": [
+          "Room1",
+          "Room2"
+        ],
+        "BALL": [
+          "ball1",
+          "ball2",
+          "ballN"
+        ],
+        "ARM": [
+          "left_arm",
+          "right_arm"
+        ],
+        "ROBOT": [
+          "robot"
+        ]
+      },
+      "Predicates": [
+        "isIn(ROOM, BALL)",
+        "isAt(ROOM, ROBOT)",
+        "isEmpty(ARM)",
+        "isHolding(ARM, BALL)"
+      ],
+      "Actions": [
+        {
+          "action": "move(FromRoom: ROOM, ToRoom: ROOM, Robot: ROBOT)",
+          "description": "Moves the robot from one room to another.",
+          "preconditions": [
+            "isAt(FromRoom, Robot)"
+          ],
+          "effects": [
+            "!isAt(FromRoom, Robot)",
+            "isAt(ToRoom, Robot)"
+          ]
+        },
+        {
+          "action": "pickup(Room: ROOM, Ball: BALL, Arm: ARM, Robot: ROBOT)",
+          "description": "Picks up a ball in a room using a specified arm.",
+          "preconditions": [
+            "isEmpty(Arm)",
+            "isAt(Room, Robot)",
+            "isIn(Room, Ball)"
+          ],
+          "effects": [
+            "!isEmpty(Arm)",
+            "!isIn(Room, Ball)",
+            "isHolding(Arm, Ball)"
+          ]
+        },
+        {
+          "action": "drop(Room: ROOM, Ball: BALL, Arm: ARM, Robot: ROBOT)",
+          "description": "Drops a ball in a room from a specified arm.",
+          "preconditions": [
+            "isHolding(Arm, Ball)",
+            "isAt(Room, Robot)"
+          ],
+          "effects": [
+            "isEmpty(Arm)",
+            "!isHolding(Arm, Ball)",
+            "isIn(Room, Ball)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "isAt(Room1, robot)",
+        "isEmpty(left_arm)",
+        "isEmpty(right_arm)",
+        "isIn(Room1, ball1)",
+        "isIn(Room1, ball2)",
+        "isIn(Room1, ballN)"
+      ],
+      "GoalStates": [
+        "isIn(Room2, ball1)",
+        "isIn(Room2, ball2)",
+        "isIn(Room2, ballN)"
+      ],
+      "Plan": [
+        {
+          "action": "pickup(Room1, ball1, left_arm, robot)"
+        },
+        {
+          "action": "move(Room1, Room2, robot)"
+        },
+        {
+          "action": "drop(Room2, ball1, left_arm, robot)"
+        },
+        {
+          "action": "pickup(Room1, ball2, right_arm, robot)"
+        },
+        {
+          "action": "move(Room1, Room2, robot)"
+        },
+        {
+          "action": "drop(Room2, ball2, right_arm, robot)"
+        },
+        {
+          "action": "pickup(Room1, ballN, left_arm, robot)"
+        },
+        {
+          "action": "move(Room1, Room2, robot)"
+        },
+        {
+          "action": "drop(Room2, ballN, left_arm, robot)"
+        }
+      ]
+    },
+    {
+      "Objects": {
+        "ROOM": [
+          "Room1",
+          "Room2"
+        ],
+        "BALL": [
+          "Ball1",
+          "Ball2"
+        ],
+        "ARM": [
+          "LeftArm",
+          "RightArm"
+        ],
+        "ROBOT": [
+          "Robot1"
+        ]
+      },
+      "Predicates": [
+        "ballIsIn(ROOM, BALL)",
+        "robotIsIn(ROOM, ROBOT)",
+        "isFree(ARM)",
+        "holds(ARM, BALL)"
+      ],
+      "Actions": [
+        {
+          "action": "pickUp(Ball: BALL, Arm: ARM, Room: ROOM, Robot: ROBOT)",
+          "description": "Pick up a ball with an arm in a room by a robot.",
+          "preconditions": [
+            "ballIsIn(Room, Ball)",
+            "robotIsIn(Room, Robot)",
+            "isFree(Arm)"
+          ],
+          "effects": [
+            "!ballIsIn(Room, Ball)",
+            "holds(Arm, Ball)",
+            "!isFree(Arm)"
+          ]
+        },
+        {
+          "action": "move(FromRoom: ROOM, ToRoom: ROOM, Robot: ROBOT)",
+          "description": "Move the robot from one room to another.",
+          "preconditions": [
+            "robotIsIn(FromRoom, Robot)"
+          ],
+          "effects": [
+            "!robotIsIn(FromRoom, Robot)",
+            "robotIsIn(ToRoom, Robot)"
+          ]
+        },
+        {
+          "action": "drop(Ball: BALL, Arm: ARM, Room: ROOM, Robot: ROBOT)",
+          "description": "Drop a ball from an arm in a room by a robot.",
+          "preconditions": [
+            "holds(Arm, Ball)",
+            "robotIsIn(Room, Robot)"
+          ],
+          "effects": [
+            "ballIsIn(Room, Ball)",
+            "!holds(Arm, Ball)",
+            "isFree(Arm)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "ballIsIn(Room1, Ball1)",
+        "ballIsIn(Room1, Ball2)",
+        "robotIsIn(Room1, Robot1)",
+        "isFree(LeftArm)",
+        "isFree(RightArm)"
+      ],
+      "GoalStates": [
+        "ballIsIn(Room2, Ball1)",
+        "ballIsIn(Room2, Ball2)"
+      ],
+      "Plan": [
+        "pickUp(Ball1, LeftArm, Room1, Robot1)",
+        "pickUp(Ball2, RightArm, Room1, Robot1)",
+        "move(Room1, Room2, Robot1)",
+        "drop(Ball1, LeftArm, Room2, Robot1)",
+        "drop(Ball2, RightArm, Room2, Robot1)"
+      ]
+    },
+    {
+      "Objects": {
+        "ROOM": [
+          "Room1",
+          "Room2"
+        ],
+        "BALL": [
+          "Ball1",
+          "Ball2",
+          "Ball3"
+        ],
+        "ARM": [
+          "LeftArm",
+          "RightArm"
+        ],
+        "ROBOT": [
+          "Robot1"
+        ]
+      },
+      "Predicates": [
+        "actorIsIn(ROBOT, ROOM)",
+        "objectIsIn(BALL, ROOM)",
+        "isEmpty(ARM)",
+        "holds(ARM, BALL)"
+      ],
+      "Actions": [
+        {
+          "action": "move(Actor: ROBOT, FromRoom: ROOM, ToRoom: ROOM)",
+          "description": "Moves the robot from one room to another.",
+          "preconditions": [
+            "actorIsIn(Actor, FromRoom)",
+            "!actorIsIn(Actor, ToRoom)"
+          ],
+          "effects": [
+            "!actorIsIn(Actor, FromRoom)",
+            "actorIsIn(Actor, ToRoom)"
+          ]
+        },
+        {
+          "action": "pickup(Actor: ROBOT, Object: BALL, Arm: ARM, Room: ROOM)",
+          "description": "Picks up a ball with an arm.",
+          "preconditions": [
+            "actorIsIn(Actor, Room)",
+            "objectIsIn(Object, Room)",
+            "isEmpty(Arm)"
+          ],
+          "effects": [
+            "!objectIsIn(Object, Room)",
+            "!isEmpty(Arm)",
+            "holds(Arm, Object)"
+          ]
+        },
+        {
+          "action": "drop(Actor: ROBOT, Object: BALL, Arm: ARM, Room: ROOM)",
+          "description": "Drops a ball from an arm in a room.",
+          "preconditions": [
+            "actorIsIn(Actor, Room)",
+            "holds(Arm, Object)"
+          ],
+          "effects": [
+            "objectIsIn(Object, Room)",
+            "!holds(Arm, Object)",
+            "isEmpty(Arm)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "actorIsIn(Robot1, Room1)",
+        "isEmpty(LeftArm)",
+        "isEmpty(RightArm)",
+        "objectIsIn(Ball1, Room1)",
+        "objectIsIn(Ball2, Room1)",
+        "objectIsIn(Ball3, Room1)"
+      ],
+      "GoalStates": [
+        "objectIsIn(Ball1, Room2)",
+        "objectIsIn(Ball2, Room2)",
+        "objectIsIn(Ball3, Room2)"
+      ],
+      "Plan": [
+        "move(Robot1, Room1, Room2)",
+        "pickup(Robot1, Ball1, LeftArm, Room1)",
+        "move(Robot1, Room1, Room2)",
+        "drop(Robot1, Ball1, LeftArm, Room2)",
+        "pickup(Robot1, Ball2, RightArm, Room1)",
+        "move(Robot1, Room1, Room2)",
+        "drop(Robot1, Ball2, RightArm, Room2)",
+        "pickup(Robot1, Ball3, LeftArm, Room1)",
+        "move(Robot1, Room1, Room2)",
+        "drop(Robot1, Ball3, LeftArm, Room2)"
+      ]
+    }
+  ],
+  "Pizza": [
+    {
+      "Objects": {
+        "INGREDIENT_SOLID": [
+          "mozzarella",
+          "olives",
+          "mushrooms",
+          "salami",
+          "peperoni",
+          "gorgonzola",
+          "basil",
+          "oregano",
+          "salt",
+          "pepper"
+        ],
+        "INGREDIENT_LIQUID": [
+          "tomatoSauce",
+          "oliveOil"
+        ],
+        "OTHER": [
+          "oven"
+        ],
+        "DOUGH": [
+          "dough"
+        ],
+        "LOCATION": [
+          "table"
+        ]
+      },
+      "Predicates": [
+        "isSolid(INGREDIENT_SOLID)",
+        "isLiquid(INGREDIENT_LIQUID)",
+        "onTable(DOUGH, LOCATION)",
+        "isWarm(OTHER)",
+        "coveredWithSolid(DOUGH, INGREDIENT_SOLID)",
+        "coveredWithLiquid(DOUGH, INGREDIENT_LIQUID)",
+        "ready(DOUGH)",
+        "baked(DOUGH)"
+      ],
+      "Actions": [
+        {
+          "action": "addSolid(ingredient: INGREDIENT_SOLID, dough: DOUGH)",
+          "description": "Adds a solid ingredient to the dough.",
+          "preconditions": [
+            "isSolid(ingredient)",
+            "!coveredWithSolid(dough, ingredient)"
+          ],
+          "effects": [
+            "coveredWithSolid(dough, ingredient)"
+          ]
+        },
+        {
+          "action": "addLiquid(ingredient: INGREDIENT_LIQUID, dough: DOUGH)",
+          "description": "Adds a liquid ingredient to the dough.",
+          "preconditions": [
+            "isLiquid(ingredient)",
+            "!coveredWithLiquid(dough, ingredient)"
+          ],
+          "effects": [
+            "coveredWithLiquid(dough, ingredient)"
+          ]
+        },
+        {
+          "action": "prepareDough(dough: DOUGH, location: LOCATION)",
+          "description": "Prepares the dough on the table to start adding ingredients.",
+          "preconditions": [
+            "onTable(dough, location)"
+          ],
+          "effects": [
+            "ready(dough)"
+          ]
+        },
+        {
+          "action": "bake(dough: DOUGH, oven: OTHER)",
+          "description": "Bakes the pizza dough.",
+          "preconditions": [
+            "isWarm(oven)",
+            "ready(dough)"
+          ],
+          "effects": [
+            "baked(dough)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "onTable(dough, table)",
+        "isWarm(oven)"
+      ],
+      "GoalStates": [
+        "baked(dough)"
+      ],
+      "Plan": [
+        "prepareDough(dough, table)",
+        "addLiquid(tomatoSauce, dough)",
+        "addSolid(mozzarella, dough)",
+        "addSolid(basil, dough)",
+        "addLiquid(oliveOil, dough)",
+        "bake(dough, oven)"
+      ]
+    },
+    {
+      "Objects": {
+        "INGREDIENT": [
+          "mozzarella",
+          "olives",
+          "mushrooms",
+          "salami",
+          "peperoni",
+          "gorgonzola",
+          "basilicum",
+          "oregano",
+          "salt",
+          "pepper"
+        ],
+        "LIQUID_INGREDIENT": [
+          "tomato_sauce",
+          "olive_oil"
+        ],
+        "TOOL": [
+          "oven",
+          "table"
+        ],
+        "DOUGH": [
+          "pizza_dough"
+        ],
+        "AGENT": [
+          "chef"
+        ]
+      },
+      "Predicates": [
+        "ingredientReady(INGREDIENT)",
+        "liquidIngredientReady(LIQUID_INGREDIENT)",
+        "ovenWarm(TOOL)",
+        "ovenContains(TOOL, DOUGH)",
+        "doughHasSolid(DOUGH)",
+        "doughHasLiquid(DOUGH)",
+        "pizzaCooked(DOUGH)",
+        "pizzaReady(DOUGH)"
+      ],
+      "Actions": [
+        {
+          "action": "chooseSolid(Ingredient: INGREDIENT)",
+          "description": "Chef chooses solid ingredients for the pizza.",
+          "preconditions": [],
+          "effects": [
+            "ingredientReady(Ingredient)"
+          ]
+        },
+        {
+          "action": "chooseLiquid(LiquidIngredient: LIQUID_INGREDIENT)",
+          "description": "Chef chooses liquid ingredients for the pizza.",
+          "preconditions": [],
+          "effects": [
+            "liquidIngredientReady(LiquidIngredient)"
+          ]
+        },
+        {
+          "action": "addSolidToDough(Ingredient: INGREDIENT, Dough: DOUGH)",
+          "description": "Chef adds solid ingredients to the pizza dough.",
+          "preconditions": [
+            "ingredientReady(Ingredient)"
+          ],
+          "effects": [
+            "doughHasSolid(Dough)"
+          ]
+        },
+        {
+          "action": "addLiquidToDough(LiquidIngredient: LIQUID_INGREDIENT, Dough: DOUGH)",
+          "description": "Chef adds liquid ingredients to the pizza dough.",
+          "preconditions": [
+            "liquidIngredientReady(LiquidIngredient)"
+          ],
+          "effects": [
+            "doughHasLiquid(Dough)"
+          ]
+        },
+        {
+          "action": "placeInOven(Dough: DOUGH, Oven: TOOL)",
+          "description": "Chef places the pizza in the oven.",
+          "preconditions": [
+            "doughHasSolid(Dough)",
+            "doughHasLiquid(Dough)",
+            "ovenWarm(Oven)"
+          ],
+          "effects": [
+            "ovenContains(Oven, Dough)"
+          ]
+        },
+        {
+          "action": "bakePizza(Oven: TOOL, Dough: DOUGH)",
+          "description": "Chef bakes the pizza in the oven.",
+          "preconditions": [
+            "ovenContains(Oven, Dough)"
+          ],
+          "effects": [
+            "!ovenContains(Oven, Dough)",
+            "pizzaCooked(Dough)"
+          ]
+        },
+        {
+          "action": "takeOutPizza(Dough: DOUGH)",
+          "description": "Chef takes the cooked pizza out of the oven.",
+          "preconditions": [
+            "pizzaCooked(Dough)"
+          ],
+          "effects": [
+            "pizzaReady(Dough)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "ovenWarm(oven)"
+      ],
+      "GoalStates": [
+        "pizzaReady(pizza_dough)"
+      ],
+      "Plan": []
+    },
+    {
+      "Objects": {
+        "INGREDIENT": [
+          "mozzarella",
+          "olives",
+          "mushrooms",
+          "salami",
+          "peperoni",
+          "gorgonzola",
+          "basilicum",
+          "oregano",
+          "salt",
+          "pepper"
+        ],
+        "LIQUID": [
+          "tomato_sauce",
+          "olive_oil"
+        ],
+        "CONTAINER": [
+          "bottle",
+          "bowl",
+          "plate"
+        ],
+        "DOUGH": [
+          "pizza_dough"
+        ],
+        "OVEN": [
+          "oven"
+        ],
+        "PIZZA": [
+          "pizza"
+        ]
+      },
+      "Predicates": [
+        "inContainer(INGREDIENT, CONTAINER)",
+        "liquidInContainer(LIQUID, CONTAINER)",
+        "doughOnContainer(DOUGH, CONTAINER)",
+        "ovenWarm(OVEN)",
+        "ingredientOnPizza(INGREDIENT, PIZZA)",
+        "liquidOnPizza(LIQUID, PIZZA)",
+        "pizzaInOven(PIZZA, OVEN)",
+        "pizzaBaked(PIZZA)",
+        "containSolidTopping(PIZZA)"
+      ],
+      "Actions": [
+        {
+          "action": "addTomatoSauce(pizza: PIZZA, sauce: LIQUID, container: CONTAINER)",
+          "description": "Add tomato sauce to the pizza dough.",
+          "preconditions": [
+            "liquidInContainer(sauce, container)"
+          ],
+          "effects": [
+            "liquidOnPizza(sauce, pizza)"
+          ]
+        },
+        {
+          "action": "addIngredient(pizza: PIZZA, ingredient: INGREDIENT, container: CONTAINER)",
+          "description": "Add a solid ingredient to the pizza.",
+          "preconditions": [
+            "inContainer(ingredient, container)",
+            "!ingredientOnPizza(ingredient, pizza)"
+          ],
+          "effects": [
+            "ingredientOnPizza(ingredient, pizza)",
+            "containSolidTopping(pizza)"
+          ]
+        },
+        {
+          "action": "drizzleOliveOil(pizza: PIZZA, oil: LIQUID, container: CONTAINER)",
+          "description": "Drizzle olive oil over the pizza.",
+          "preconditions": [
+            "liquidInContainer(oil, container)",
+            "containSolidTopping(pizza)"
+          ],
+          "effects": [
+            "liquidOnPizza(oil, pizza)"
+          ]
+        },
+        {
+          "action": "transferToOven(pizza: PIZZA, oven: OVEN, container: CONTAINER)",
+          "description": "Transfer the pizza into the oven.",
+          "preconditions": [
+            "ovenWarm(oven)"
+          ],
+          "effects": [
+            "pizzaInOven(pizza, oven)"
+          ]
+        },
+        {
+          "action": "bakePizza(pizza: PIZZA, oven: OVEN)",
+          "description": "Bake the pizza that is in the oven.",
+          "preconditions": [
+            "pizzaInOven(pizza, oven)"
+          ],
+          "effects": [
+            "pizzaBaked(pizza)"
+          ]
+        },
+        {
+          "action": "removePizza(pizza: PIZZA, oven: OVEN)",
+          "description": "Remove the pizza from the oven.",
+          "preconditions": [
+            "pizzaBaked(pizza)",
+            "pizzaInOven(pizza, oven)"
+          ],
+          "effects": [
+            "!pizzaInOven(pizza, oven)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "liquidInContainer(tomato_sauce, bottle)",
+        "liquidInContainer(olive_oil, bottle)",
+        "inContainer(mozzarella, bowl)",
+        "inContainer(olives, bowl)",
+        "inContainer(mushrooms, bowl)",
+        "inContainer(salami, bowl)",
+        "inContainer(peperoni, bowl)",
+        "inContainer(gorgonzola, bowl)",
+        "inContainer(basilicum, bowl)",
+        "inContainer(oregano, bowl)",
+        "inContainer(salt, bowl)",
+        "inContainer(pepper, bowl)",
+        "ovenWarm(oven)"
+      ],
+      "GoalStates": [
+        "pizzaBaked(pizza)"
+      ],
+      "Plan": [
+        "addTomatoSauce(pizza, tomato_sauce, bottle)",
+        "addIngredient(pizza, mozzarella, bowl)",
+        "addIngredient(pizza, olives, bowl)",
+        "addIngredient(pizza, mushrooms, bowl)",
+        "addIngredient(pizza, salami, bowl)",
+        "addIngredient(pizza, peperoni, bowl)",
+        "addIngredient(pizza, gorgonzola, bowl)",
+        "addIngredient(pizza, basilicum, bowl)",
+        "addIngredient(pizza, oregano, bowl)",
+        "addIngredient(pizza, salt, bowl)",
+        "addIngredient(pizza, pepper, bowl)",
+        "drizzleOliveOil(pizza, olive_oil, bottle)",
+        "transferToOven(pizza, oven, plate)",
+        "bakePizza(pizza, oven)",
+        "removePizza(pizza, oven)"
+      ]
+    },
+    {
+      "Objects": {
+        "INGREDIENT_SOLID": [
+          "mozzarella",
+          "olives",
+          "mushrooms",
+          "salami",
+          "pepperoni",
+          "gorgonzola",
+          "basilicum",
+          "oregano",
+          "salt",
+          "pepper"
+        ],
+        "INGREDIENT_LIQUID": [
+          "tomatoSauce",
+          "oliveOil"
+        ],
+        "OTHER_OBJECT": [
+          "pizzaDough",
+          "oven",
+          "table"
+        ]
+      },
+      "Predicates": [
+        "isTopped(OTHER_OBJECT)",
+        "isBaked(OTHER_OBJECT)",
+        "hasSolidIngredient(OTHER_OBJECT, INGREDIENT_SOLID)",
+        "hasLiquidIngredient(OTHER_OBJECT, INGREDIENT_LIQUID)",
+        "isWarm(OTHER_OBJECT)",
+        "isSolidOnTable(INGREDIENT_SOLID)",
+        "isLiquidOnTable(INGREDIENT_LIQUID)",
+        "isOtherObjectOnTable(OTHER_OBJECT)",
+        "isUntopped(OTHER_OBJECT)"
+      ],
+      "Actions": [
+        {
+          "action": "spread(tomatoSauce: INGREDIENT_LIQUID, pizzaDough: OTHER_OBJECT)",
+          "description": "Spread tomato sauce on the pizza dough.",
+          "preconditions": [
+            "isUntopped(pizzaDough)",
+            "isLiquidOnTable(tomatoSauce)"
+          ],
+          "effects": [
+            "!isUntopped(pizzaDough)",
+            "hasLiquidIngredient(pizzaDough, tomatoSauce)"
+          ]
+        },
+        {
+          "action": "addSolid(ingredient: INGREDIENT_SOLID, pizzaDough: OTHER_OBJECT)",
+          "description": "Add a solid ingredient on top of the pizza dough.",
+          "preconditions": [
+            "isSolidOnTable(ingredient)"
+          ],
+          "effects": [
+            "hasSolidIngredient(pizzaDough, ingredient)"
+          ]
+        },
+        {
+          "action": "drizzle(oliveOil: INGREDIENT_LIQUID, pizzaDough: OTHER_OBJECT)",
+          "description": "Drizzle olive oil over the pizza.",
+          "preconditions": [
+            "isLiquidOnTable(oliveOil)"
+          ],
+          "effects": [
+            "hasLiquidIngredient(pizzaDough, oliveOil)"
+          ]
+        },
+        {
+          "action": "bake(pizzaDough: OTHER_OBJECT, oven: OTHER_OBJECT)",
+          "description": "Bake the pizza in the oven.",
+          "preconditions": [
+            "isWarm(oven)",
+            "isOtherObjectOnTable(pizzaDough)"
+          ],
+          "effects": [
+            "isBaked(pizzaDough)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "isUntopped(pizzaDough)",
+        "isSolidOnTable(mozzarella)",
+        "isSolidOnTable(olives)",
+        "isSolidOnTable(mushrooms)",
+        "isSolidOnTable(salami)",
+        "isSolidOnTable(pepperoni)",
+        "isSolidOnTable(gorgonzola)",
+        "isSolidOnTable(basilicum)",
+        "isSolidOnTable(oregano)",
+        "isSolidOnTable(salt)",
+        "isSolidOnTable(pepper)",
+        "isLiquidOnTable(tomatoSauce)",
+        "isLiquidOnTable(oliveOil)",
+        "isOtherObjectOnTable(pizzaDough)",
+        "isWarm(oven)"
+      ],
+      "GoalStates": [
+        "isBaked(pizzaDough)"
+      ],
+      "Plan": [
+        "spread(tomatoSauce, pizzaDough)",
+        "addSolid(mozzarella, pizzaDough)",
+        "addSolid(olives, pizzaDough)",
+        "addSolid(mushrooms, pizzaDough)",
+        "addSolid(salami, pizzaDough)",
+        "addSolid(pepperoni, pizzaDough)",
+        "addSolid(gorgonzola, pizzaDough)",
+        "addSolid(basilicum, pizzaDough)",
+        "addSolid(oregano, pizzaDough)",
+        "addSolid(salt, pizzaDough)",
+        "addSolid(pepper, pizzaDough)",
+        "drizzle(oliveOil, pizzaDough)",
+        "bake(pizzaDough, oven)"
+      ]
+    },
+    {
+      "Objects": {
+        "SOLID_INGREDIENT": [
+          "mozzarella",
+          "olives",
+          "mushrooms",
+          "salami",
+          "peperoni",
+          "gorgonzola",
+          "basilicum",
+          "oregano",
+          "salt",
+          "pepper"
+        ],
+        "LIQUID_INGREDIENT": [
+          "tomato_sauce",
+          "olive_oil"
+        ],
+        "CONTAINER": [
+          "bowl_for_mozzarella",
+          "bowl_for_olives",
+          "bowl_for_mushrooms",
+          "bowl_for_salami",
+          "bowl_for_peperoni",
+          "bowl_for_gorgonzola",
+          "bowl_for_basilicum",
+          "bowl_for_oregano",
+          "bowl_for_salt",
+          "bowl_for_pepper",
+          "bottle_for_tomato_sauce",
+          "bottle_for_olive_oil"
+        ],
+        "FACILITY": [
+          "oven",
+          "table"
+        ],
+        "SURFACE": [
+          "plate"
+        ]
+      },
+      "Predicates": [
+        "onTable(SURFACE)",
+        "solidInContainer(SOLID_INGREDIENT, CONTAINER)",
+        "liquidInContainer(LIQUID_INGREDIENT, CONTAINER)",
+        "isWarm(FACILITY)",
+        "surfaceContainsSolid(SURFACE, SOLID_INGREDIENT)",
+        "surfaceContainsLiquid(SURFACE, LIQUID_INGREDIENT)",
+        "isSolid(SOLID_INGREDIENT)",
+        "isLiquid(LIQUID_INGREDIENT)",
+        "isEmpty(SURFACE)"
+      ],
+      "Actions": [
+        {
+          "action": "addSolidTopping(solidIngredient: SOLID_INGREDIENT, surface: SURFACE)",
+          "description": "Adds a solid ingredient to the pizza dough on the surface.",
+          "preconditions": [
+            "isSolid(solidIngredient)",
+            "onTable(surface)",
+            "isEmpty(surface)"
+          ],
+          "effects": [
+            "surfaceContainsSolid(surface, solidIngredient)",
+            "!isEmpty(surface)"
+          ]
+        },
+        {
+          "action": "addLiquidTopping(liquidIngredient: LIQUID_INGREDIENT, surface: SURFACE)",
+          "description": "Adds a liquid ingredient to the pizza dough on the surface.",
+          "preconditions": [
+            "isLiquid(liquidIngredient)",
+            "onTable(surface)"
+          ],
+          "effects": [
+            "surfaceContainsLiquid(surface, liquidIngredient)"
+          ]
+        },
+        {
+          "action": "bakePizza(surface: SURFACE, facility: FACILITY)",
+          "description": "Bakes the pizza by putting the surface in the facility.",
+          "preconditions": [
+            "isWarm(facility)",
+            "onTable(surface)"
+          ],
+          "effects": [
+            "!isEmpty(surface)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "onTable(plate)",
+        "isEmpty(plate)",
+        "isWarm(oven)"
+      ],
+      "GoalStates": [
+        "!isEmpty(plate)"
+      ],
+      "Plan": [
+        "addSolidTopping(mozzarella, plate)",
+        "addSolidTopping(olives, plate)",
+        "addLiquidTopping(tomato_sauce, plate)",
+        "bakePizza(plate, oven)"
+      ]
+    }
+  ],
+  "Logistic": [
+    {
+      "Objects": {
+        "CITY": [
+          "CityA",
+          "CityB"
+        ],
+        "LOCATION": [
+          "Location1",
+          "Location2",
+          "Location3",
+          "Location4"
+        ],
+        "AIRPORT": [
+          "AirportA",
+          "AirportB"
+        ],
+        "TRUCK": [
+          "TruckA",
+          "TruckB"
+        ],
+        "PLANE": [
+          "Plane1"
+        ],
+        "PACKAGE": [
+          "Package1",
+          "Package2"
+        ]
+      },
+      "Predicates": [
+        "atLocation(PACKAGE, LOCATION)",
+        "inTruck(PACKAGE, TRUCK)",
+        "inPlane(PACKAGE, PLANE)",
+        "truckAtAirport(TRUCK, AIRPORT)",
+        "planeAtAirport(PLANE, AIRPORT)",
+        "destination(PACKAGE, LOCATION)",
+        "atTruck(TRUCK, LOCATION)"
+      ],
+      "Actions": [
+        {
+          "action": "loadTruck(Package: PACKAGE, Truck: TRUCK, Location: LOCATION)",
+          "description": "Load a package onto a truck at a location",
+          "preconditions": [
+            "atLocation(Package, Location)",
+            "!inTruck(Package, Truck)"
+          ],
+          "effects": [
+            "!atLocation(Package, Location)",
+            "inTruck(Package, Truck)"
+          ]
+        },
+        {
+          "action": "drive(Truck: TRUCK, FromLocation: LOCATION, ToLocation: LOCATION)",
+          "description": "Drive a truck from one location to another within the same city",
+          "preconditions": [
+            "atTruck(Truck, FromLocation)"
+          ],
+          "effects": [
+            "!atTruck(Truck, FromLocation)",
+            "atTruck(Truck, ToLocation)"
+          ]
+        },
+        {
+          "action": "loadPlane(Package: PACKAGE, Plane: PLANE, Airport: AIRPORT, Truck: TRUCK)",
+          "description": "Load a package onto a plane at an airport using a designated truck",
+          "preconditions": [
+            "inTruck(Package, Truck)",
+            "planeAtAirport(Plane, Airport)",
+            "truckAtAirport(Truck, Airport)"
+          ],
+          "effects": [
+            "!inTruck(Package, Truck)",
+            "inPlane(Package, Plane)"
+          ]
+        },
+        {
+          "action": "fly(Plane: PLANE, FromAirport: AIRPORT, ToAirport: AIRPORT)",
+          "description": "Fly a plane from one airport to another",
+          "preconditions": [
+            "planeAtAirport(Plane, FromAirport)"
+          ],
+          "effects": [
+            "!planeAtAirport(Plane, FromAirport)",
+            "planeAtAirport(Plane, ToAirport)"
+          ]
+        },
+        {
+          "action": "unloadTruck(Package: PACKAGE, Truck: TRUCK, Location: LOCATION)",
+          "description": "Unload a package from a truck at a location",
+          "preconditions": [
+            "inTruck(Package, Truck)"
+          ],
+          "effects": [
+            "!inTruck(Package, Truck)",
+            "atLocation(Package, Location)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "atTruck(TruckA, Location1)",
+        "atTruck(TruckB, Location3)",
+        "atLocation(Package1, Location2)",
+        "atLocation(Package2, Location1)",
+        "truckAtAirport(TruckA, AirportA)",
+        "truckAtAirport(TruckB, AirportB)",
+        "planeAtAirport(Plane1, AirportA)"
+      ],
+      "GoalStates": [
+        "atLocation(Package1, Location4)",
+        "atLocation(Package2, Location3)"
+      ],
+      "Plan": [
+        "loadTruck(Package2, TruckA, Location1)",
+        "drive(TruckA, Location1, AirportA)",
+        "loadTruck(Package1, TruckA, Location2)",
+        "drive(TruckA, Location2, AirportA)",
+        "loadPlane(Package1, Plane1, AirportA, TruckA)",
+        "loadPlane(Package2, Plane1, AirportA, TruckA)",
+        "fly(Plane1, AirportA, AirportB)",
+        "unloadTruck(Package1, TruckB, Location4)",
+        "drive(TruckB, AirportB, Location4)",
+        "unloadTruck(Package1, TruckB, Location4)",
+        "unloadTruck(Package2, TruckB, Location3)",
+        "drive(TruckB, Location4, Location3)",
+        "unloadTruck(Package2, TruckB, Location3)"
+      ]
+    },
+    {
+      "Objects": {
+        "CITY": [
+          "CityA",
+          "CityB"
+        ],
+        "LOCATION": [
+          "LocationA1",
+          "LocationA2",
+          "LocationB1",
+          "LocationB2"
+        ],
+        "TRUCK": [
+          "TruckA",
+          "TruckB"
+        ],
+        "PLANE": [
+          "Plane1"
+        ],
+        "PACKAGE": [
+          "Package1",
+          "Package2"
+        ]
+      },
+      "Predicates": [
+        "atPackage(PACKAGE, LOCATION)",
+        "atTruck(TRUCK, LOCATION)",
+        "atPlane(PLANE, LOCATION)",
+        "insideTruck(PACKAGE, TRUCK)",
+        "insidePlane(PACKAGE, PLANE)",
+        "inCity(LOCATION, CITY)"
+      ],
+      "Actions": [
+        {
+          "action": "load(Package: PACKAGE, Truck: TRUCK, Location: LOCATION)",
+          "description": "Load a package onto a truck at a specific location.",
+          "preconditions": [
+            "atPackage(Package, Location)",
+            "atTruck(Truck, Location)"
+          ],
+          "effects": [
+            "!atPackage(Package, Location)",
+            "insideTruck(Package, Truck)"
+          ]
+        },
+        {
+          "action": "drive(Truck: TRUCK, From: LOCATION, To: LOCATION, City: CITY)",
+          "description": "Drive a truck from one location to another within the same city.",
+          "preconditions": [
+            "atTruck(Truck, From)",
+            "inCity(From, City)",
+            "inCity(To, City)"
+          ],
+          "effects": [
+            "!atTruck(Truck, From)",
+            "atTruck(Truck, To)"
+          ]
+        },
+        {
+          "action": "loadOntoPlane(Package: PACKAGE, Plane: PLANE, Location: LOCATION)",
+          "description": "Load a package from a location onto a plane at an airport.",
+          "preconditions": [
+            "atPackage(Package, Location)",
+            "atPlane(Plane, Location)"
+          ],
+          "effects": [
+            "!atPackage(Package, Location)",
+            "insidePlane(Package, Plane)"
+          ]
+        },
+        {
+          "action": "fly(Plane: PLANE, From: LOCATION, To: LOCATION)",
+          "description": "Fly a plane from one city's airport to another.",
+          "preconditions": [
+            "atPlane(Plane, From)"
+          ],
+          "effects": [
+            "!atPlane(Plane, From)",
+            "atPlane(Plane, To)"
+          ]
+        },
+        {
+          "action": "unloadFromPlane(Package: PACKAGE, Plane: PLANE, Location: LOCATION, Truck: TRUCK)",
+          "description": "Unload a package from a plane to a truck at an airport.",
+          "preconditions": [
+            "insidePlane(Package, Plane)",
+            "atPlane(Plane, Location)",
+            "atTruck(Truck, Location)"
+          ],
+          "effects": [
+            "!insidePlane(Package, Plane)",
+            "atPackage(Package, Location)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "atPackage(Package1, LocationA2)",
+        "atPackage(Package2, LocationB2)",
+        "atTruck(TruckA, LocationA1)",
+        "atTruck(TruckB, LocationB1)",
+        "atPlane(Plane1, LocationA1)",
+        "inCity(LocationA1, CityA)",
+        "inCity(LocationA2, CityA)",
+        "inCity(LocationB1, CityB)",
+        "inCity(LocationB2, CityB)"
+      ],
+      "GoalStates": [
+        "atPackage(Package1, LocationB2)",
+        "atPackage(Package2, LocationA2)"
+      ],
+      "Plan": [
+        "load(Package1, TruckA, LocationA2)",
+        "drive(TruckA, LocationA2, LocationA1, CityA)",
+        "loadOntoPlane(Package1, Plane1, LocationA1)",
+        "fly(Plane1, LocationA1, LocationB1)",
+        "unloadFromPlane(Package1, Plane1, LocationB1, TruckB)",
+        "drive(TruckB, LocationB1, LocationB2, CityB)",
+        "unloadFromPlane(Package2, Plane1, LocationB2, TruckB)",
+        "loadOntoPlane(Package2, Plane1, LocationB1)",
+        "fly(Plane1, LocationB1, LocationA1)",
+        "unloadFromPlane(Package2, Plane1, LocationA1, TruckA)",
+        "drive(TruckA, LocationA1, LocationA2, CityA)"
+      ]
+    },
+    {
+      "Objects": {
+        "CITY": [
+          "CityA",
+          "CityB"
+        ],
+        "LOCATION": [
+          "LocationA1",
+          "LocationA2",
+          "LocationB1",
+          "LocationB2"
+        ],
+        "TRUCK": [
+          "TruckA",
+          "TruckB"
+        ],
+        "PLANE": [
+          "Plane1"
+        ],
+        "PACKAGE": [
+          "Package1",
+          "Package2"
+        ]
+      },
+      "Predicates": [
+        "atPackage(LOCATION, PACKAGE)",
+        "atTruck(LOCATION, TRUCK)",
+        "atPlane(LOCATION, PLANE)",
+        "inPackageTruck(PACKAGE, TRUCK)",
+        "inPackagePlane(PACKAGE, PLANE)"
+      ],
+      "Actions": [
+        {
+          "action": "loadTruck(Package: PACKAGE, Truck: TRUCK, Location: LOCATION)",
+          "description": "Loads a package onto a truck at a location.",
+          "preconditions": [
+            "atPackage(Location, Package)",
+            "atTruck(Location, Truck)"
+          ],
+          "effects": [
+            "!atPackage(Location, Package)",
+            "inPackageTruck(Package, Truck)"
+          ]
+        },
+        {
+          "action": "drive(Truck: TRUCK, FromLocation: LOCATION, ToLocation: LOCATION)",
+          "description": "Drives a truck from one location to another within the same city.",
+          "preconditions": [
+            "atTruck(FromLocation, Truck)"
+          ],
+          "effects": [
+            "!atTruck(FromLocation, Truck)",
+            "atTruck(ToLocation, Truck)"
+          ]
+        },
+        {
+          "action": "loadPlane(Package: PACKAGE, Plane: PLANE, Truck: TRUCK, Airport: LOCATION)",
+          "description": "Loads a package from a truck onto a plane at an airport.",
+          "preconditions": [
+            "inPackageTruck(Package, Truck)",
+            "atTruck(Airport, Truck)",
+            "atPlane(Airport, Plane)"
+          ],
+          "effects": [
+            "!inPackageTruck(Package, Truck)",
+            "inPackagePlane(Package, Plane)"
+          ]
+        },
+        {
+          "action": "fly(Plane: PLANE, FromCity: LOCATION, ToCity: LOCATION)",
+          "description": "Flies a plane from one city to another.",
+          "preconditions": [
+            "atPlane(FromCity, Plane)"
+          ],
+          "effects": [
+            "!atPlane(FromCity, Plane)",
+            "atPlane(ToCity, Plane)"
+          ]
+        },
+        {
+          "action": "unloadTruck(Package: PACKAGE, Plane: PLANE, Truck: TRUCK, Airport: LOCATION)",
+          "description": "Unloads a package from a plane to a truck at an airport.",
+          "preconditions": [
+            "inPackagePlane(Package, Plane)",
+            "atPlane(Airport, Plane)",
+            "atTruck(Airport, Truck)"
+          ],
+          "effects": [
+            "!inPackagePlane(Package, Plane)",
+            "inPackageTruck(Package, Truck)"
+          ]
+        },
+        {
+          "action": "unloadLocation(Package: PACKAGE, Truck: TRUCK, Location: LOCATION)",
+          "description": "Unloads a package from a truck to its final location.",
+          "preconditions": [
+            "inPackageTruck(Package, Truck)",
+            "atTruck(Location, Truck)"
+          ],
+          "effects": [
+            "!inPackageTruck(Package, Truck)",
+            "atPackage(Location, Package)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "atTruck(LocationA1, TruckA)",
+        "atTruck(LocationB1, TruckB)",
+        "atPlane(LocationA1, Plane1)",
+        "atPackage(LocationA2, Package1)",
+        "atPackage(LocationB2, Package2)"
+      ],
+      "GoalStates": [
+        "atPackage(LocationA2, Package1)",
+        "atPackage(LocationB1, Package2)"
+      ],
+      "Plan": [
+        "loadTruck(Package1, TruckA, LocationA2)",
+        "drive(TruckA, LocationA2, LocationA1)",
+        "loadTruck(Package2, TruckB, LocationB2)",
+        "drive(TruckB, LocationB2, LocationB1)",
+        "loadPlane(Package1, Plane1, TruckA, LocationA1)",
+        "loadPlane(Package2, Plane1, TruckB, LocationB1)",
+        "fly(Plane1, LocationA1, LocationB1)",
+        "unloadTruck(Package1, Plane1, TruckB, LocationB1)",
+        "fly(Plane1, LocationB1, LocationA1)",
+        "unloadTruck(Package2, Plane1, TruckA, LocationA1)",
+        "unloadLocation(Package1, TruckB, LocationA2)",
+        "unloadLocation(Package2, TruckA, LocationB1)"
+      ]
+    },
+    {
+      "Objects": {
+        "VEHICLE": [
+          "TRUCK",
+          "PLANE"
+        ],
+        "TRUCK_INSTANCE": [
+          "Truck1",
+          "Truck2"
+        ],
+        "PLANE_INSTANCE": [
+          "Plane1"
+        ],
+        "PACKAGE": [
+          "Package1",
+          "Package2"
+        ],
+        "LOCATION": [
+          "Loc1",
+          "Loc2",
+          "Loc3",
+          "Loc4"
+        ]
+      },
+      "Predicates": [
+        "atPackage(PACKAGE, LOCATION)",
+        "atTruck(TRUCK_INSTANCE, LOCATION)",
+        "atPlane(PLANE_INSTANCE, LOCATION)",
+        "inTruckPackage(PACKAGE, TRUCK_INSTANCE)",
+        "inPlanePackage(PACKAGE, PLANE_INSTANCE)",
+        "destination(PACKAGE, LOCATION)"
+      ],
+      "Actions": [
+        {
+          "action": "loadTruck(package: PACKAGE, truck: TRUCK_INSTANCE, location: LOCATION)",
+          "description": "Loads a package onto a truck at a location.",
+          "preconditions": [
+            "atPackage(package, location)",
+            "atTruck(truck, location)"
+          ],
+          "effects": [
+            "!atPackage(package, location)",
+            "inTruckPackage(package, truck)"
+          ]
+        },
+        {
+          "action": "drive(truck: TRUCK_INSTANCE, fromLocation: LOCATION, toLocation: LOCATION)",
+          "description": "Drives a truck from one location to another.",
+          "preconditions": [
+            "atTruck(truck, fromLocation)"
+          ],
+          "effects": [
+            "!atTruck(truck, fromLocation)",
+            "atTruck(truck, toLocation)"
+          ]
+        },
+        {
+          "action": "loadPlane(package: PACKAGE, plane: PLANE_INSTANCE, location: LOCATION)",
+          "description": "Loads a package onto a plane at a location.",
+          "preconditions": [
+            "atPackage(package, location)",
+            "atPlane(plane, location)"
+          ],
+          "effects": [
+            "!atPackage(package, location)",
+            "inPlanePackage(package, plane)"
+          ]
+        },
+        {
+          "action": "fly(plane: PLANE_INSTANCE, fromLocation: LOCATION, toLocation: LOCATION)",
+          "description": "Flies a plane from one location to another.",
+          "preconditions": [
+            "atPlane(plane, fromLocation)"
+          ],
+          "effects": [
+            "!atPlane(plane, fromLocation)",
+            "atPlane(plane, toLocation)"
+          ]
+        },
+        {
+          "action": "unloadTruck(package: PACKAGE, truck: TRUCK_INSTANCE, location: LOCATION)",
+          "description": "Unloads a package from a truck at a location.",
+          "preconditions": [
+            "inTruckPackage(package, truck)",
+            "atTruck(truck, location)"
+          ],
+          "effects": [
+            "!inTruckPackage(package, truck)",
+            "atPackage(package, location)"
+          ]
+        },
+        {
+          "action": "unloadPlane(package: PACKAGE, plane: PLANE_INSTANCE, location: LOCATION)",
+          "description": "Unloads a package from a plane at a location.",
+          "preconditions": [
+            "inPlanePackage(package, plane)",
+            "atPlane(plane, location)"
+          ],
+          "effects": [
+            "!inPlanePackage(package, plane)",
+            "atPackage(package, location)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "atPackage(Package1, Loc1)",
+        "atPackage(Package2, Loc3)",
+        "atTruck(Truck1, Loc1)",
+        "atTruck(Truck2, Loc3)",
+        "atPlane(Plane1, Loc2)"
+      ],
+      "GoalStates": [
+        "atPackage(Package1, Loc4)",
+        "atPackage(Package2, Loc2)"
+      ],
+      "Plan": [
+        "loadTruck(Package1, Truck1, Loc1)",
+        "drive(Truck1, Loc1, Loc2)",
+        "loadPlane(Package1, Plane1, Loc2)",
+        "fly(Plane1, Loc2, Loc4)",
+        "unloadPlane(Package1, Plane1, Loc4)",
+        "loadTruck(Package2, Truck2, Loc3)",
+        "drive(Truck2, Loc3, Loc2)",
+        "unloadTruck(Package2, Truck2, Loc2)"
+      ]
+    },
+    {
+      "Objects": {
+        "CITY": [
+          "CityA",
+          "CityB"
+        ],
+        "LOCATION": [
+          "LocationA1",
+          "LocationA2",
+          "LocationB1",
+          "LocationB2"
+        ],
+        "TRUCK": [
+          "TruckA",
+          "TruckB"
+        ],
+        "PLANE": [
+          "Plane1",
+          "Plane2"
+        ],
+        "PACKAGE": [
+          "Package1",
+          "Package2"
+        ]
+      },
+      "Predicates": [
+        "atLocation(PACKAGE, LOCATION)",
+        "atTruckCityLocation(TRUCK, CITY, LOCATION)",
+        "atPlaneCity(PLANE, CITY)",
+        "containsTruck(TRUCK, PACKAGE)",
+        "containsPlane(PLANE, PACKAGE)"
+      ],
+      "Actions": [
+        {
+          "action": "loadTruck(package: PACKAGE, truck: TRUCK, location: LOCATION, city: CITY)",
+          "description": "Load the package onto the truck at the specified location within a city.",
+          "preconditions": [
+            "atLocation(package, location)",
+            "atTruckCityLocation(truck, city, location)"
+          ],
+          "effects": [
+            "!atLocation(package, location)",
+            "containsTruck(truck, package)"
+          ]
+        },
+        {
+          "action": "driveTruck(truck: TRUCK, fromLocation: LOCATION, toLocation: LOCATION, city: CITY)",
+          "description": "Drive the truck from one location to another within the same city.",
+          "preconditions": [
+            "atTruckCityLocation(truck, city, fromLocation)"
+          ],
+          "effects": [
+            "!atTruckCityLocation(truck, city, fromLocation)",
+            "atTruckCityLocation(truck, city, toLocation)"
+          ]
+        },
+        {
+          "action": "unloadTruck(package: PACKAGE, truck: TRUCK, location: LOCATION, city: CITY)",
+          "description": "Unload the package from the truck at the specified location within a city.",
+          "preconditions": [
+            "containsTruck(truck, package)",
+            "atTruckCityLocation(truck, city, location)"
+          ],
+          "effects": [
+            "!containsTruck(truck, package)",
+            "atLocation(package, location)"
+          ]
+        },
+        {
+          "action": "loadPlane(package: PACKAGE, plane: PLANE, location: LOCATION, city: CITY)",
+          "description": "Load the package onto the plane in the specified location within a city.",
+          "preconditions": [
+            "atLocation(package, location)",
+            "atPlaneCity(plane, city)"
+          ],
+          "effects": [
+            "!atLocation(package, location)",
+            "containsPlane(plane, package)"
+          ]
+        },
+        {
+          "action": "flyPlane(plane: PLANE, fromCity: CITY, toCity: CITY)",
+          "description": "Fly the plane from one city to another.",
+          "preconditions": [
+            "atPlaneCity(plane, fromCity)"
+          ],
+          "effects": [
+            "!atPlaneCity(plane, fromCity)",
+            "atPlaneCity(plane, toCity)"
+          ]
+        },
+        {
+          "action": "unloadPlane(package: PACKAGE, plane: PLANE, location: LOCATION, city: CITY)",
+          "description": "Unload the package from the plane in the specified location within a city.",
+          "preconditions": [
+            "containsPlane(plane, package)",
+            "atPlaneCity(plane, city)"
+          ],
+          "effects": [
+            "!containsPlane(plane, package)",
+            "atLocation(package, location)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "atTruckCityLocation(TruckA, CityA, LocationA1)",
+        "atTruckCityLocation(TruckB, CityB, LocationB1)",
+        "atPlaneCity(Plane1, CityA)",
+        "atPlaneCity(Plane2, CityB)",
+        "atLocation(Package1, LocationA2)",
+        "atLocation(Package2, LocationB2)"
+      ],
+      "GoalStates": [
+        "atLocation(Package1, LocationB2)",
+        "atLocation(Package2, LocationA2)"
+      ],
+      "Plan": []
+    }
+  ],
+  "Tyreworld": [
+    {
+      "Objects": {
+        "TOOL": [
+          "wrench",
+          "jack",
+          "pump"
+        ],
+        "WHEEL": [
+          "flat_tyre",
+          "spare_tyre"
+        ],
+        "HUB": [
+          "front_hub"
+        ],
+        "NUT": [
+          "nut"
+        ],
+        "CONTAINER": [
+          "boot"
+        ],
+        "LOCATION": [
+          "car_side"
+        ],
+        "ROBOT": [
+          "robot"
+        ]
+      },
+      "Predicates": [
+        "toolIsInContainer(TOOL, CONTAINER)",
+        "wheelIsInContainer(WHEEL, CONTAINER)",
+        "isOnHub(WHEEL, HUB)",
+        "isSecuredBy(WHEEL, NUT)",
+        "isAt(ROBOT, LOCATION)",
+        "isJackedUp(ROBOT)",
+        "isLoose(NUT)"
+      ],
+      "Actions": [
+        {
+          "action": "fetch(tool: TOOL, robot: ROBOT, container: CONTAINER, location: LOCATION)",
+          "description": "The robot fetches a tool from the container.",
+          "preconditions": [
+            "toolIsInContainer(tool, container)",
+            "isAt(robot, location)"
+          ],
+          "effects": [
+            "!toolIsInContainer(tool, container)"
+          ]
+        },
+        {
+          "action": "undoNut(nut: NUT, wheel: WHEEL, robot: ROBOT, location: LOCATION)",
+          "description": "The robot uses the wrench to undo the nut securing the wheel.",
+          "preconditions": [
+            "isSecuredBy(wheel, nut)",
+            "!isJackedUp(robot)",
+            "isAt(robot, location)"
+          ],
+          "effects": [
+            "!isSecuredBy(wheel, nut)",
+            "isLoose(nut)"
+          ]
+        },
+        {
+          "action": "jackUp(robot: ROBOT, location: LOCATION)",
+          "description": "The robot uses the jack to jack up the car.",
+          "preconditions": [
+            "!isJackedUp(robot)",
+            "isAt(robot, location)"
+          ],
+          "effects": [
+            "isJackedUp(robot)"
+          ]
+        },
+        {
+          "action": "removeTyre(wheel: WHEEL, hub: HUB, robot: ROBOT, nut: NUT)",
+          "description": "The robot removes the wheel from the hub.",
+          "preconditions": [
+            "isOnHub(wheel, hub)",
+            "isJackedUp(robot)",
+            "isLoose(nut)"
+          ],
+          "effects": [
+            "!isOnHub(wheel, hub)",
+            "!isLoose(nut)"
+          ]
+        },
+        {
+          "action": "attachTyre(wheel: WHEEL, hub: HUB, robot: ROBOT, location: LOCATION)",
+          "description": "The robot places the wheel on the hub.",
+          "preconditions": [
+            "!isOnHub(wheel, hub)",
+            "isAt(robot, location)"
+          ],
+          "effects": [
+            "isOnHub(wheel, hub)"
+          ]
+        },
+        {
+          "action": "doUpNut(nut: NUT, wheel: WHEEL, robot: ROBOT, location: LOCATION)",
+          "description": "The robot uses the wrench to tighten the nut on the wheel.",
+          "preconditions": [
+            "!isSecuredBy(wheel, nut)",
+            "isAt(robot, location)"
+          ],
+          "effects": [
+            "isSecuredBy(wheel, nut)"
+          ]
+        },
+        {
+          "action": "jackDown(robot: ROBOT)",
+          "description": "The robot uses the jack to lower the car.",
+          "preconditions": [
+            "isJackedUp(robot)"
+          ],
+          "effects": [
+            "!isJackedUp(robot)"
+          ]
+        },
+        {
+          "action": "storeTyre(wheel: WHEEL, container: CONTAINER, robot: ROBOT, location: LOCATION)",
+          "description": "The robot places the wheel in the container.",
+          "preconditions": [
+            "isAt(robot, location)"
+          ],
+          "effects": [
+            "wheelIsInContainer(wheel, container)"
+          ]
+        },
+        {
+          "action": "storeTools(tool: TOOL, container: CONTAINER, robot: ROBOT, location: LOCATION)",
+          "description": "The robot places the tool back in the container.",
+          "preconditions": [
+            "isAt(robot, location)"
+          ],
+          "effects": [
+            "toolIsInContainer(tool, container)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "toolIsInContainer(wrench, boot)",
+        "toolIsInContainer(jack, boot)",
+        "toolIsInContainer(pump, boot)",
+        "isOnHub(flat_tyre, front_hub)",
+        "isSecuredBy(flat_tyre, nut)",
+        "isAt(robot, car_side)",
+        "!isJackedUp(robot)"
+      ],
+      "GoalStates": [
+        "wheelIsInContainer(flat_tyre, boot)",
+        "isOnHub(spare_tyre, front_hub)",
+        "isSecuredBy(spare_tyre, nut)"
+      ],
+      "Plan": [
+        "fetch(wrench, robot, boot, car_side)",
+        "fetch(jack, robot, boot, car_side)",
+        "fetch(pump, robot, boot, car_side)",
+        "undoNut(nut, flat_tyre, robot, car_side)",
+        "jackUp(robot, car_side)",
+        "removeTyre(flat_tyre, front_hub, robot, nut)",
+        "attachTyre(spare_tyre, front_hub, robot, car_side)",
+        "doUpNut(nut, spare_tyre, robot, car_side)",
+        "jackDown(robot)",
+        "storeTyre(flat_tyre, boot, robot, car_side)",
+        "storeTyre(spare_tyre, boot, robot, car_side)",
+        "storeTools(wrench, boot, robot, car_side)",
+        "storeTools(jack, boot, robot, car_side)",
+        "storeTools(pump, boot, robot, car_side)"
+      ]
+    },
+    {
+      "Objects": {
+        "TOOL": [
+          "wrench",
+          "jack",
+          "pump"
+        ],
+        "WHEEL": [
+          "flat_wheel",
+          "spare_wheel"
+        ],
+        "NUT": [
+          "flat_nut",
+          "spare_nut"
+        ],
+        "CONTAINER": [
+          "boot"
+        ],
+        "HUB": [
+          "flat_hub",
+          "spare_hub"
+        ],
+        "LOCATION": [
+          "car_side",
+          "target_wheel"
+        ]
+      },
+      "Predicates": [
+        "inTool(CONTAINER, TOOL)",
+        "opened(CONTAINER)",
+        "closed(CONTAINER)",
+        "holdingTool(TOOL)",
+        "connected(WHEEL, HUB)",
+        "atWheel(LOCATION, WHEEL)",
+        "holdingWheel(WHEEL)",
+        "free(WHEEL)",
+        "loose(NUT)",
+        "jackedUp(HUB)",
+        "lowered(HUB)",
+        "inflated(WHEEL)"
+      ],
+      "Actions": [
+        {
+          "action": "open(container: CONTAINER)",
+          "description": "Opens the container.",
+          "preconditions": [
+            "closed(container)"
+          ],
+          "effects": [
+            "opened(container)",
+            "!closed(container)"
+          ]
+        },
+        {
+          "action": "fetchTool(container: CONTAINER, tool: TOOL)",
+          "description": "Fetches a tool from the container.",
+          "preconditions": [
+            "inTool(container, tool)",
+            "opened(container)"
+          ],
+          "effects": [
+            "holdingTool(tool)",
+            "!inTool(container, tool)"
+          ]
+        },
+        {
+          "action": "undo(nut: NUT, wheel: WHEEL, tool: TOOL, hub: HUB)",
+          "description": "Undoes the nut from the wheel using the specified tool.",
+          "preconditions": [
+            "holdingTool(tool)",
+            "connected(wheel, hub)"
+          ],
+          "effects": [
+            "free(wheel)",
+            "loose(nut)"
+          ]
+        },
+        {
+          "action": "jackUp(hub: HUB, tool: TOOL, location: LOCATION, wheel: WHEEL)",
+          "description": "Jacks up the car by the hub using the specified tool at the location where the wheel is present.",
+          "preconditions": [
+            "holdingTool(tool)",
+            "atWheel(location, wheel)"
+          ],
+          "effects": [
+            "jackedUp(hub)"
+          ]
+        },
+        {
+          "action": "remove(wheel: WHEEL, hub: HUB)",
+          "description": "Removes the wheel.",
+          "preconditions": [
+            "free(wheel)",
+            "jackedUp(hub)"
+          ],
+          "effects": [
+            "!connected(wheel, hub)",
+            "holdingWheel(wheel)"
+          ]
+        },
+        {
+          "action": "doUp(wheel: WHEEL, hub: HUB, location: LOCATION)",
+          "description": "Does up the wheel on the hub.",
+          "preconditions": [
+            "holdingWheel(wheel)",
+            "jackedUp(hub)"
+          ],
+          "effects": [
+            "connected(wheel, hub)",
+            "atWheel(location, wheel)"
+          ]
+        },
+        {
+          "action": "lowerCar(hub: HUB)",
+          "description": "Lowers the car.",
+          "preconditions": [
+            "jackedUp(hub)"
+          ],
+          "effects": [
+            "lowered(hub)",
+            "!jackedUp(hub)"
+          ]
+        },
+        {
+          "action": "pump(wheel: WHEEL, tool: TOOL, location: LOCATION)",
+          "description": "Pumps the wheel using the specified tool.",
+          "preconditions": [
+            "holdingTool(tool)",
+            "atWheel(location, wheel)"
+          ],
+          "effects": [
+            "inflated(wheel)"
+          ]
+        },
+        {
+          "action": "putBack(container: CONTAINER, tool: TOOL)",
+          "description": "Puts back a tool in the container.",
+          "preconditions": [
+            "holdingTool(tool)",
+            "opened(container)"
+          ],
+          "effects": [
+            "inTool(container, tool)",
+            "!holdingTool(tool)"
+          ]
+        },
+        {
+          "action": "close(container: CONTAINER)",
+          "description": "Closes the container.",
+          "preconditions": [
+            "opened(container)"
+          ],
+          "effects": [
+            "closed(container)",
+            "!opened(container)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "inTool(boot, wrench)",
+        "inTool(boot, jack)",
+        "inTool(boot, pump)",
+        "connected(flat_wheel, flat_hub)",
+        "atWheel(car_side, flat_wheel)",
+        "closed(boot)"
+      ],
+      "GoalStates": [
+        "connected(spare_wheel, flat_hub)",
+        "atWheel(target_wheel, spare_wheel)",
+        "inTool(boot, wrench)",
+        "inTool(boot, jack)",
+        "inTool(boot, pump)",
+        "closed(boot)"
+      ],
+      "Plan": [
+        "open(container: boot)",
+        "fetchTool(container: boot, tool: wrench)",
+        "fetchTool(container: boot, tool: jack)",
+        "fetchTool(container: boot, tool: pump)",
+        "undo(nut: flat_nut, wheel: flat_wheel, tool: wrench, hub: flat_hub)",
+        "jackUp(hub: flat_hub, tool: jack, location: car_side, wheel: flat_wheel)",
+        "remove(wheel: flat_wheel, hub: flat_hub)",
+        "doUp(wheel: spare_wheel, hub: flat_hub, location: target_wheel)",
+        "lowerCar(hub: flat_hub)",
+        "pump(wheel: spare_wheel, tool: pump, location: target_wheel)",
+        "putBack(container: boot, tool: wrench)",
+        "putBack(container: boot, tool: jack)",
+        "putBack(container: boot, tool: pump)",
+        "close(container: boot)"
+      ]
+    },
+    {
+      "Objects": {
+        "LOCATION": [
+          "carSide"
+        ],
+        "CONTAINER": [
+          "bootContainer"
+        ],
+        "TOOL": [
+          "wrenchTool",
+          "jackTool",
+          "pumpTool"
+        ],
+        "WHEEL": [
+          "flatTyreWheel",
+          "spareTyreWheel"
+        ],
+        "NUT": [
+          "nutObject"
+        ],
+        "HUB": [
+          "hubObject"
+        ],
+        "SMALL_OBJECT": [
+          "wrenchSmall",
+          "jackSmall",
+          "pumpSmall",
+          "flatTyreSmall",
+          "spareTyreSmall",
+          "nutSmall"
+        ],
+        "ROBOT": [
+          "robot"
+        ]
+      },
+      "Predicates": [
+        "isAt(ROBOT, LOCATION)",
+        "inContainer(SMALL_OBJECT, CONTAINER)",
+        "holdingTool(ROBOT, TOOL)",
+        "attachedTyre(HUB, WHEEL)",
+        "securedNut(HUB, NUT)",
+        "isLifted(LOCATION)",
+        "holdingSmallObject(ROBOT, SMALL_OBJECT)"
+      ],
+      "Actions": [
+        {
+          "action": "move(robot: ROBOT, toLocation: LOCATION)",
+          "description": "Robot moves to a specified location.",
+          "preconditions": [
+            "!isAt(robot, toLocation)"
+          ],
+          "effects": [
+            "isAt(robot, toLocation)"
+          ]
+        },
+        {
+          "action": "fetch(robot: ROBOT, smallObject: SMALL_OBJECT, container: CONTAINER)",
+          "description": "Robot fetches a small object from a container.",
+          "preconditions": [
+            "inContainer(smallObject, container)"
+          ],
+          "effects": [
+            "holdingSmallObject(robot, smallObject)",
+            "!inContainer(smallObject, container)"
+          ]
+        },
+        {
+          "action": "undoNut(robot: ROBOT, hub: HUB, nut: NUT, wrench: TOOL)",
+          "description": "Robot uses the wrench tool to undo the nut securing the tyre.",
+          "preconditions": [
+            "holdingTool(robot, wrench)",
+            "securedNut(hub, nut)"
+          ],
+          "effects": [
+            "!securedNut(hub, nut)"
+          ]
+        },
+        {
+          "action": "useJack(robot: ROBOT, location: LOCATION, jack: TOOL)",
+          "description": "Robot uses the jack tool to lift the car at location.",
+          "preconditions": [
+            "holdingTool(robot, jack)",
+            "!isLifted(location)"
+          ],
+          "effects": [
+            "isLifted(location)"
+          ]
+        },
+        {
+          "action": "removeTyre(robot: ROBOT, hub: HUB, wheel: WHEEL, location: LOCATION, nut: NUT)",
+          "description": "Robot removes the wheel (expecting it to be flat) from the hub.",
+          "preconditions": [
+            "isLifted(location)",
+            "!securedNut(hub, nut)",
+            "attachedTyre(hub, wheel)"
+          ],
+          "effects": [
+            "!attachedTyre(hub, wheel)"
+          ]
+        },
+        {
+          "action": "attachTyre(robot: ROBOT, hub: HUB, wheel: WHEEL, location: LOCATION, smallObject: SMALL_OBJECT)",
+          "description": "Robot attaches a wheel (expecting it to be a spare) to the hub.",
+          "preconditions": [
+            "isLifted(location)",
+            "holdingSmallObject(robot, smallObject)",
+            "!attachedTyre(hub, wheel)"
+          ],
+          "effects": [
+            "attachedTyre(hub, wheel)",
+            "!holdingSmallObject(robot, smallObject)"
+          ]
+        },
+        {
+          "action": "doUpNut(robot: ROBOT, hub: HUB, nut: NUT, wrench: TOOL, wheel: WHEEL)",
+          "description": "Robot tightens the nut to secure the wheel (expecting it to be the spare) on the hub.",
+          "preconditions": [
+            "holdingTool(robot, wrench)",
+            "attachedTyre(hub, wheel)"
+          ],
+          "effects": [
+            "securedNut(hub, nut)"
+          ]
+        },
+        {
+          "action": "lowerJack(robot: ROBOT, location: LOCATION, jack: TOOL)",
+          "description": "Robot lowers the jack to bring the car down at location.",
+          "preconditions": [
+            "isLifted(location)",
+            "holdingTool(robot, jack)"
+          ],
+          "effects": [
+            "!isLifted(location)"
+          ]
+        },
+        {
+          "action": "returnToBoot(robot: ROBOT, smallObject: SMALL_OBJECT, container: CONTAINER)",
+          "description": "Robot returns the small object to the boot container.",
+          "preconditions": [
+            "holdingSmallObject(robot, smallObject)"
+          ],
+          "effects": [
+            "!holdingSmallObject(robot, smallObject)",
+            "inContainer(smallObject, container)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "isAt(robot, carSide)",
+        "inContainer(wrenchSmall, bootContainer)",
+        "inContainer(jackSmall, bootContainer)",
+        "inContainer(pumpSmall, bootContainer)",
+        "inContainer(flatTyreSmall, bootContainer)",
+        "inContainer(spareTyreSmall, bootContainer)",
+        "inContainer(nutSmall, bootContainer)",
+        "attachedTyre(hubObject, flatTyreWheel)",
+        "securedNut(hubObject, nutObject)",
+        "!isLifted(carSide)"
+      ],
+      "GoalStates": [
+        "attachedTyre(hubObject, spareTyreWheel)",
+        "inContainer(flatTyreSmall, bootContainer)",
+        "inContainer(wrenchSmall, bootContainer)",
+        "inContainer(jackSmall, bootContainer)",
+        "inContainer(pumpSmall, bootContainer)",
+        "securedNut(hubObject, nutObject)"
+      ],
+      "Plan": []
+    },
+    {
+      "Objects": {
+        "TOOL": [
+          "wrench",
+          "jack"
+        ],
+        "LOCATION": [
+          "workshop",
+          "car_side"
+        ],
+        "ROBOT": [
+          "robot1"
+        ],
+        "WHEEL": [
+          "wheel_front_left",
+          "wheel_front_right",
+          "wheel_back_left",
+          "wheel_back_right"
+        ],
+        "NUT": [
+          "nut1",
+          "nut2",
+          "nut3",
+          "nut4"
+        ]
+      },
+      "Predicates": [
+        "at(ROBOT, LOCATION)",
+        "in(TOOL, LOCATION)",
+        "empty(ROBOT)",
+        "holding(ROBOT, TOOL)",
+        "on(WHEEL, LOCATION)",
+        "raised(LOCATION)",
+        "lowered(LOCATION)",
+        "tightened(NUT, WHEEL)",
+        "isJack(TOOL)",
+        "isWrench(TOOL)"
+      ],
+      "Actions": [
+        {
+          "action": "fetch(tool: TOOL, location: LOCATION, robot: ROBOT)",
+          "description": "The robot fetches a tool from a location.",
+          "preconditions": [
+            "at(robot, location)",
+            "in(tool, location)",
+            "empty(robot)"
+          ],
+          "effects": [
+            "holding(robot, tool)",
+            "!in(tool, location)",
+            "!empty(robot)"
+          ]
+        },
+        {
+          "action": "returnTools(robot: ROBOT, tool: TOOL, location: LOCATION)",
+          "description": "The robot returns tools to the location.",
+          "preconditions": [
+            "holding(robot, tool)"
+          ],
+          "effects": [
+            "!holding(robot, tool)",
+            "in(tool, location)",
+            "empty(robot)"
+          ]
+        },
+        {
+          "action": "jackUpCar(robot: ROBOT, tool: TOOL, location: LOCATION)",
+          "description": "The robot uses a jack to raise the car at a location.",
+          "preconditions": [
+            "at(robot, location)",
+            "holding(robot, tool)",
+            "isJack(tool)",
+            "lowered(location)"
+          ],
+          "effects": [
+            "raised(location)",
+            "!lowered(location)"
+          ]
+        },
+        {
+          "action": "lowerCar(robot: ROBOT, tool: TOOL, location: LOCATION)",
+          "description": "The robot uses a jack to lower the car at a location.",
+          "preconditions": [
+            "at(robot, location)",
+            "holding(robot, tool)",
+            "isJack(tool)",
+            "raised(location)"
+          ],
+          "effects": [
+            "lowered(location)",
+            "!raised(location)"
+          ]
+        },
+        {
+          "action": "undoNut(robot: ROBOT, tool: TOOL, nut: NUT, wheel: WHEEL)",
+          "description": "The robot uses a wrench to undo a nut on a wheel.",
+          "preconditions": [
+            "holding(robot, tool)",
+            "isWrench(tool)",
+            "tightened(nut, wheel)"
+          ],
+          "effects": [
+            "!tightened(nut, wheel)"
+          ]
+        },
+        {
+          "action": "tightenNut(robot: ROBOT, tool: TOOL, nut: NUT, wheel: WHEEL)",
+          "description": "The robot uses a wrench to tighten a nut on a wheel.",
+          "preconditions": [
+            "holding(robot, tool)",
+            "isWrench(tool)",
+            "!tightened(nut, wheel)"
+          ],
+          "effects": [
+            "tightened(nut, wheel)"
+          ]
+        },
+        {
+          "action": "replaceWheel(robot: ROBOT, spareWheel: WHEEL, location: LOCATION)",
+          "description": "The robot replaces a wheel on the car.",
+          "preconditions": [
+            "at(robot, location)",
+            "raised(location)"
+          ],
+          "effects": [
+            "on(spareWheel, location)"
+          ]
+        },
+        {
+          "action": "removeWheel(robot: ROBOT, targetWheel: WHEEL, location: LOCATION)",
+          "description": "The robot removes a wheel from the car.",
+          "preconditions": [
+            "at(robot, location)",
+            "raised(location)",
+            "on(targetWheel, location)"
+          ],
+          "effects": [
+            "!on(targetWheel, location)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "at(robot1, workshop)",
+        "in(wrench, workshop)",
+        "in(jack, workshop)",
+        "empty(robot1)",
+        "lowered(car_side)",
+        "on(wheel_front_left, car_side)"
+      ],
+      "GoalStates": [
+        "on(wheel_front_right, car_side)",
+        "in(wrench, workshop)",
+        "in(jack, workshop)",
+        "lowered(car_side)"
+      ],
+      "Plan": []
+    },
+    {
+      "Objects": {
+        "TOOL": [
+          "wrench",
+          "jack",
+          "pump"
+        ],
+        "WHEEL": [
+          "flat_wheel",
+          "spare_wheel"
+        ],
+        "NUT": [
+          "nut1"
+        ],
+        "CONTAINER": [
+          "boot"
+        ],
+        "HUB": [
+          "car_hub"
+        ],
+        "LOCATION": [
+          "car_side",
+          "target_wheel"
+        ],
+        "ROBOT": [
+          "robot"
+        ]
+      },
+      "Predicates": [
+        "toolAtLocation(TOOL, LOCATION)",
+        "wheelAtLocation(WHEEL, LOCATION)",
+        "wheelAtHub(WHEEL, HUB)",
+        "nutAtHub(NUT, HUB)",
+        "robotAtLocation(ROBOT, LOCATION)",
+        "hubAtLocation(HUB, LOCATION)",
+        "toolContainedInContainer(TOOL, CONTAINER)",
+        "nutAssociatedWithHub(NUT, HUB)",
+        "toolIsType(TOOL)",
+        "nutLooseOnHub(NUT, HUB)",
+        "hubElevated(HUB)"
+      ],
+      "Actions": [
+        {
+          "action": "fetch(tool: TOOL, container: CONTAINER, location: LOCATION, robot: ROBOT)",
+          "description": "Robot fetches a tool from the boot to the car side.",
+          "preconditions": [
+            "toolContainedInContainer(tool, container)",
+            "robotAtLocation(robot, location)"
+          ],
+          "effects": [
+            "toolAtLocation(tool, location)",
+            "!toolContainedInContainer(tool, container)"
+          ]
+        },
+        {
+          "action": "undo(nut: NUT, hub: HUB, tool: TOOL, location: LOCATION)",
+          "description": "Robot uses the wrench to undo the nut from the car hub.",
+          "preconditions": [
+            "nutAtHub(nut, hub)",
+            "toolAtLocation(tool, location)",
+            "toolIsType(tool)"
+          ],
+          "effects": [
+            "nutLooseOnHub(nut, hub)",
+            "!nutAssociatedWithHub(nut, hub)"
+          ]
+        },
+        {
+          "action": "remove(wheel: WHEEL, hub: HUB, nut: NUT, location: LOCATION)",
+          "description": "Robot removes the flat wheel from the car hub.",
+          "preconditions": [
+            "hubElevated(hub)",
+            "wheelAtHub(wheel, hub)",
+            "nutLooseOnHub(nut, hub)"
+          ],
+          "effects": [
+            "wheelAtLocation(wheel, location)",
+            "!wheelAtHub(wheel, hub)"
+          ]
+        },
+        {
+          "action": "mount(wheel: WHEEL, hub: HUB, location: LOCATION)",
+          "description": "Robot mounts the spare wheel on the car hub.",
+          "preconditions": [
+            "hubElevated(hub)",
+            "wheelAtLocation(wheel, location)"
+          ],
+          "effects": [
+            "wheelAtHub(wheel, hub)",
+            "!wheelAtLocation(wheel, location)"
+          ]
+        },
+        {
+          "action": "doUp(nut: NUT, hub: HUB, tool: TOOL, location: LOCATION, wheel: WHEEL)",
+          "description": "Robot uses the wrench to tighten the nut securing the spare wheel on the car hub.",
+          "preconditions": [
+            "nutAtHub(nut, hub)",
+            "toolAtLocation(tool, location)",
+            "toolIsType(tool)",
+            "wheelAtHub(wheel, hub)"
+          ],
+          "effects": [
+            "nutAssociatedWithHub(nut, hub)",
+            "!nutLooseOnHub(nut, hub)"
+          ]
+        },
+        {
+          "action": "jackDown(jack: TOOL, location: LOCATION, hub: HUB, nut: NUT)",
+          "description": "Robot uses the jack at the car side to lower the car.",
+          "preconditions": [
+            "toolAtLocation(jack, location)",
+            "nutAssociatedWithHub(nut, hub)"
+          ],
+          "effects": [
+            "hubAtLocation(hub, location)",
+            "!hubElevated(hub)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "robotAtLocation(robot, target_wheel)",
+        "toolContainedInContainer(wrench, boot)",
+        "toolContainedInContainer(jack, boot)",
+        "toolContainedInContainer(pump, boot)",
+        "wheelAtHub(flat_wheel, car_hub)",
+        "nutAssociatedWithHub(nut1, car_hub)"
+      ],
+      "GoalStates": [
+        "wheelAtHub(spare_wheel, car_hub)",
+        "nutAssociatedWithHub(nut1, car_hub)"
+      ],
+      "Plan": [
+        "fetch(wrench, boot, car_side, robot)",
+        "undo(nut1, car_hub, wrench, car_side)",
+        "fetch(jack, boot, car_side, robot)",
+        "jackUp(jack, car_side, car_hub)",
+        "remove(flat_wheel, car_hub, nut1, car_side)",
+        "fetch(spare_wheel, boot, car_side, robot)",
+        "mount(spare_wheel, car_hub, car_side)",
+        "doUp(nut1, car_hub, wrench, car_side, spare_wheel)",
+        "jackDown(jack, car_side, car_hub, nut1)"
+      ]
+    }
+  ],
+  "Household": [
+    {
+      "Objects": {
+        "ROBOT": [
+          "robot1"
+        ],
+        "LOCATION": [
+          "kitchenCounterLoc",
+          "diningTableLoc",
+          "drawerLoc"
+        ],
+        "HOUSEHOLD_OBJECT": [
+          "apple",
+          "cloth"
+        ],
+        "RECEPTACLE": [
+          "lunchBoxReceptacle"
+        ]
+      },
+      "Predicates": [
+        "isAt(ROBOT, LOCATION)",
+        "isHolding(ROBOT, HOUSEHOLD_OBJECT)",
+        "isHoldingReceptacle(ROBOT, RECEPTACLE)",
+        "objectIsAt(HOUSEHOLD_OBJECT, LOCATION)",
+        "receptacleIsAt(RECEPTACLE, LOCATION)",
+        "objectIsInside(HOUSEHOLD_OBJECT, RECEPTACLE)",
+        "drawerIsOpen(LOCATION)"
+      ],
+      "Actions": [
+        {
+          "action": "navigate(who: ROBOT, from: LOCATION, to: LOCATION)",
+          "description": "Moves the robot from one location to another.",
+          "preconditions": [
+            "isAt(who, from)",
+            "!isAt(who, to)"
+          ],
+          "effects": [
+            "!isAt(who, from)",
+            "isAt(who, to)"
+          ]
+        },
+        {
+          "action": "openDrawer(who: ROBOT, drawer: LOCATION)",
+          "description": "Opens the drawer if the robot is nearby.",
+          "preconditions": [
+            "isAt(who, drawer)"
+          ],
+          "effects": [
+            "drawerIsOpen(drawer)"
+          ]
+        },
+        {
+          "action": "pick(who: ROBOT, what: HOUSEHOLD_OBJECT, from: LOCATION)",
+          "description": "Picks up a household object from a location if the robot is not holding anything.",
+          "preconditions": [
+            "isAt(who, from)",
+            "objectIsAt(what, from)"
+          ],
+          "effects": [
+            "isHolding(who, what)",
+            "!objectIsAt(what, from)"
+          ]
+        },
+        {
+          "action": "pickReceptacle(who: ROBOT, what: RECEPTACLE, from: LOCATION)",
+          "description": "Picks up a receptacle from a location if the robot is not holding anything.",
+          "preconditions": [
+            "isAt(who, from)",
+            "receptacleIsAt(what, from)"
+          ],
+          "effects": [
+            "isHoldingReceptacle(who, what)",
+            "!receptacleIsAt(what, from)"
+          ]
+        },
+        {
+          "action": "place(who: ROBOT, what: HOUSEHOLD_OBJECT, at: LOCATION)",
+          "description": "Places a household object at a location if the robot is holding it.",
+          "preconditions": [
+            "isHolding(who, what)",
+            "isAt(who, at)"
+          ],
+          "effects": [
+            "!isHolding(who, what)",
+            "objectIsAt(what, at)"
+          ]
+        },
+        {
+          "action": "placeReceptacle(who: ROBOT, what: RECEPTACLE, at: LOCATION)",
+          "description": "Places a receptacle at a location if the robot is holding it.",
+          "preconditions": [
+            "isHoldingReceptacle(who, what)",
+            "isAt(who, at)"
+          ],
+          "effects": [
+            "!isHoldingReceptacle(who, what)",
+            "receptacleIsAt(what, at)"
+          ]
+        },
+        {
+          "action": "placeInside(who: ROBOT, what: HOUSEHOLD_OBJECT, insideWhat: RECEPTACLE)",
+          "description": "Places an object inside a receptacle if holding both.",
+          "preconditions": [
+            "isHolding(who, what)",
+            "isHoldingReceptacle(who, insideWhat)"
+          ],
+          "effects": [
+            "!isHolding(who, what)",
+            "objectIsInside(what, insideWhat)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "isAt(robot1, kitchenCounterLoc)",
+        "objectIsAt(apple, kitchenCounterLoc)",
+        "objectIsAt(cloth, diningTableLoc)",
+        "receptacleIsAt(lunchBoxReceptacle, drawerLoc)"
+      ],
+      "GoalStates": [
+        "objectIsInside(apple, lunchBoxReceptacle)",
+        "receptacleIsAt(lunchBoxReceptacle, diningTableLoc)",
+        "objectIsAt(cloth, kitchenCounterLoc)"
+      ],
+      "Plan": [
+        "navigate(robot1, kitchenCounterLoc, drawerLoc)",
+        "openDrawer(robot1, drawerLoc)",
+        "pickReceptacle(robot1, lunchBoxReceptacle, drawerLoc)",
+        "navigate(robot1, drawerLoc, diningTableLoc)",
+        "placeReceptacle(robot1, lunchBoxReceptacle, diningTableLoc)",
+        "navigate(robot1, diningTableLoc, kitchenCounterLoc)",
+        "pick(robot1, apple, kitchenCounterLoc)",
+        "navigate(robot1, kitchenCounterLoc, diningTableLoc)",
+        "placeInside(robot1, apple, lunchBoxReceptacle)",
+        "navigate(robot1, diningTableLoc, kitchenCounterLoc)",
+        "pick(robot1, cloth, diningTableLoc)",
+        "navigate(robot1, kitchenCounterLoc, diningTableLoc)",
+        "place(robot1, cloth, kitchenCounterLoc)"
+      ]
+    },
+    {
+      "Objects": {
+        "LOCATION": [
+          "DiningTable",
+          "SideTable",
+          "KitchenCounter"
+        ],
+        "HOUSEHOLD_OBJECT": [
+          "HandheldVacuumCleaner",
+          "Apple"
+        ],
+        "SMALL_RECEPTACLE": [
+          "LunchBox"
+        ],
+        "ROBOT": [
+          "Robot"
+        ]
+      },
+      "Predicates": [
+        "isAt(ROBOT, LOCATION)",
+        "isObjectAt(HOUSEHOLD_OBJECT, LOCATION)",
+        "isObjectIn(HOUSEHOLD_OBJECT, SMALL_RECEPTACLE)",
+        "isGripperEmpty(ROBOT)",
+        "isObjectHeld(ROBOT, HOUSEHOLD_OBJECT)",
+        "isClean(LOCATION)"
+      ],
+      "Actions": [
+        {
+          "action": "move(robot: ROBOT, fromLocation: LOCATION, toLocation: LOCATION)",
+          "description": "Moves the robot from one location to another.",
+          "preconditions": [
+            "isAt(robot, fromLocation)",
+            "!isAt(robot, toLocation)"
+          ],
+          "effects": [
+            "!isAt(robot, fromLocation)",
+            "isAt(robot, toLocation)"
+          ]
+        },
+        {
+          "action": "pickUp(robot: ROBOT, object: HOUSEHOLD_OBJECT, location: LOCATION)",
+          "description": "Robot picks up an object from a location.",
+          "preconditions": [
+            "isAt(robot, location)",
+            "isObjectAt(object, location)",
+            "isGripperEmpty(robot)"
+          ],
+          "effects": [
+            "!isObjectAt(object, location)",
+            "!isGripperEmpty(robot)",
+            "isObjectHeld(robot, object)"
+          ]
+        },
+        {
+          "action": "cleanWith(robot: ROBOT, cleaningTool: HOUSEHOLD_OBJECT, location: LOCATION)",
+          "description": "Robot cleans a location with a cleaning tool.",
+          "preconditions": [
+            "isAt(robot, location)",
+            "isObjectHeld(robot, cleaningTool)",
+            "!isClean(location)"
+          ],
+          "effects": [
+            "isClean(location)"
+          ]
+        },
+        {
+          "action": "putInReceptacle(robot: ROBOT, object: HOUSEHOLD_OBJECT, receptacle: SMALL_RECEPTACLE, location: LOCATION)",
+          "description": "Robot puts an object into a receptacle at a location.",
+          "preconditions": [
+            "isAt(robot, location)",
+            "isObjectHeld(robot, object)",
+            "!isObjectIn(object, receptacle)"
+          ],
+          "effects": [
+            "!isObjectHeld(robot, object)",
+            "isObjectIn(object, receptacle)",
+            "isGripperEmpty(robot)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "isAt(Robot, DiningTable)",
+        "isObjectAt(HandheldVacuumCleaner, SideTable)",
+        "isObjectAt(Apple, DiningTable)",
+        "isGripperEmpty(Robot)"
+      ],
+      "GoalStates": [
+        "isClean(DiningTable)",
+        "isObjectIn(Apple, LunchBox)",
+        "isGripperEmpty(Robot)"
+      ],
+      "Plan": [
+        "move(Robot, DiningTable, SideTable)",
+        "pickUp(Robot, HandheldVacuumCleaner, SideTable)",
+        "move(Robot, SideTable, DiningTable)",
+        "cleanWith(Robot, HandheldVacuumCleaner, DiningTable)",
+        "move(Robot, DiningTable, KitchenCounter)",
+        "pickUp(Robot, Apple, DiningTable)",
+        "putInReceptacle(Robot, Apple, LunchBox, KitchenCounter)"
+      ]
+    },
+    {
+      "Objects": {
+        "LOCATION": [
+          "livingRoom",
+          "diningRoom",
+          "bedroom",
+          "kitchen"
+        ],
+        "FURNITURE_APPLIANCE": [
+          "diningTable",
+          "sideTable",
+          "drawers",
+          "microwave"
+        ],
+        "HOUSEHOLD_OBJECT": [
+          "apple",
+          "cloth",
+          "handheldVacuum"
+        ],
+        "SMALL_RECEPTACLE": [
+          "bowl"
+        ],
+        "ROBOT": [
+          "robot"
+        ]
+      },
+      "Predicates": [
+        "isAt(ROBOT, LOCATION)",
+        "isOnHouseholdObject(HOUSEHOLD_OBJECT, FURNITURE_APPLIANCE)",
+        "isIn(HOUSEHOLD_OBJECT, SMALL_RECEPTACLE)",
+        "isEmpty(ROBOT)",
+        "contains(SMALL_RECEPTACLE, HOUSEHOLD_OBJECT)",
+        "isConnected(LOCATION, LOCATION)"
+      ],
+      "Actions": [
+        {
+          "action": "navigate(robot: ROBOT, fromLocation: LOCATION, toLocation: LOCATION)",
+          "description": "Robot moves from one location to another if they are connected.",
+          "preconditions": [
+            "isAt(robot, fromLocation)",
+            "isConnected(fromLocation, toLocation)",
+            "!isAt(robot, toLocation)"
+          ],
+          "effects": [
+            "!isAt(robot, fromLocation)",
+            "isAt(robot, toLocation)"
+          ]
+        },
+        {
+          "action": "pickUp(robot: ROBOT, object: HOUSEHOLD_OBJECT, from: FURNITURE_APPLIANCE)",
+          "description": "Robot picks up an object from a furniture if its gripper is empty.",
+          "preconditions": [
+            "isOnHouseholdObject(object, from)",
+            "isEmpty(robot)"
+          ],
+          "effects": [
+            "!isOnHouseholdObject(object, from)",
+            "!isEmpty(robot)"
+          ]
+        },
+        {
+          "action": "placeIn(robot: ROBOT, object: HOUSEHOLD_OBJECT, receptacle: SMALL_RECEPTACLE)",
+          "description": "Robot places an object into a small receptacle.",
+          "preconditions": [
+            "!isEmpty(robot)",
+            "!contains(receptacle, object)",
+            "!isIn(object, receptacle)"
+          ],
+          "effects": [
+            "isIn(object, receptacle)",
+            "isEmpty(robot)",
+            "contains(receptacle, object)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "isAt(robot, livingRoom)",
+        "isOnHouseholdObject(apple, diningTable)",
+        "isOnHouseholdObject(cloth, sideTable)",
+        "isEmpty(robot)"
+      ],
+      "GoalStates": [
+        "isAt(robot, livingRoom)",
+        "isEmpty(robot)",
+        "isIn(apple, bowl)"
+      ],
+      "Plan": [
+        "navigate(robot, livingRoom, diningRoom)",
+        "pickUp(robot, apple, diningTable)",
+        "placeIn(robot, apple, bowl)",
+        "navigate(robot, diningRoom, bedroom)",
+        "pickUp(robot, cloth, sideTable)",
+        "placeIn(robot, cloth, drawers)",
+        "navigate(robot, bedroom, livingRoom)"
+      ]
+    },
+    {
+      "Objects": {
+        "ROBOT": [
+          "robot"
+        ],
+        "FURNITURE": [
+          "diningTable",
+          "drawer"
+        ],
+        "APPLIANCE": [
+          "microwave"
+        ],
+        "HOUSEHOLD_OBJECT": [
+          "apple",
+          "banana",
+          "cloth"
+        ],
+        "RECEPTACLE": [
+          "lunchBox"
+        ]
+      },
+      "Predicates": [
+        "isAt(ROBOT, FURNITURE)",
+        "isOpenDrawer(FURNITURE)",
+        "isClosed(FURNITURE)",
+        "isHoldingObject(ROBOT, HOUSEHOLD_OBJECT)",
+        "isHoldingReceptacle(ROBOT, RECEPTACLE)",
+        "contains(RECEPTACLE, HOUSEHOLD_OBJECT)",
+        "isOnTopObject(HOUSEHOLD_OBJECT, FURNITURE)",
+        "isOnTop(RECEPTACLE, FURNITURE)"
+      ],
+      "Actions": [
+        {
+          "action": "navigate(robot: ROBOT, from: FURNITURE, to: FURNITURE)",
+          "description": "Moves the robot from one furniture to another.",
+          "preconditions": [
+            "isAt(robot, from)",
+            "!isAt(robot, to)"
+          ],
+          "effects": [
+            "!isAt(robot, from)",
+            "isAt(robot, to)"
+          ]
+        },
+        {
+          "action": "open(drawer: FURNITURE, robot: ROBOT)",
+          "description": "The robot opens the drawer.",
+          "preconditions": [
+            "isAt(robot, drawer)",
+            "!isOpenDrawer(drawer)",
+            "isClosed(drawer)"
+          ],
+          "effects": [
+            "isOpenDrawer(drawer)",
+            "!isClosed(drawer)"
+          ]
+        },
+        {
+          "action": "pick(robot: ROBOT, object: HOUSEHOLD_OBJECT, from: FURNITURE)",
+          "description": "The robot picks an object from a furniture.",
+          "preconditions": [
+            "isAt(robot, from)",
+            "!isHoldingObject(robot, object)",
+            "isOnTopObject(object, from)"
+          ],
+          "effects": [
+            "isHoldingObject(robot, object)",
+            "!isOnTopObject(object, from)"
+          ]
+        },
+        {
+          "action": "drop(robot: ROBOT, object: HOUSEHOLD_OBJECT, into: RECEPTACLE)",
+          "description": "The robot drops an object into a receptacle.",
+          "preconditions": [
+            "isHoldingObject(robot, object)"
+          ],
+          "effects": [
+            "!isHoldingObject(robot, object)",
+            "contains(into, object)"
+          ]
+        },
+        {
+          "action": "close(drawer: FURNITURE, robot: ROBOT)",
+          "description": "The robot closes the drawer.",
+          "preconditions": [
+            "isOpenDrawer(drawer)",
+            "isAt(robot, drawer)"
+          ],
+          "effects": [
+            "!isOpenDrawer(drawer)",
+            "isClosed(drawer)"
+          ]
+        },
+        {
+          "action": "placeOn(robot: ROBOT, object: HOUSEHOLD_OBJECT, on: FURNITURE)",
+          "description": "The robot places an object on a furniture surface.",
+          "preconditions": [
+            "isHoldingObject(robot, object)"
+          ],
+          "effects": [
+            "!isHoldingObject(robot, object)",
+            "isOnTopObject(object, on)"
+          ]
+        },
+        {
+          "action": "placeOnTop(robot: ROBOT, receptacle: RECEPTACLE, on: FURNITURE)",
+          "description": "The robot places a receptacle on top of furniture.",
+          "preconditions": [
+            "isHoldingReceptacle(robot, receptacle)"
+          ],
+          "effects": [
+            "!isHoldingReceptacle(robot, receptacle)",
+            "isOnTop(receptacle, on)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "isAt(robot, diningTable)",
+        "isOnTopObject(apple, diningTable)",
+        "isOnTopObject(banana, diningTable)",
+        "isOnTopObject(cloth, diningTable)",
+        "!isOpenDrawer(drawer)",
+        "isClosed(drawer)"
+      ],
+      "GoalStates": [
+        "contains(lunchBox, apple)",
+        "isOnTop(lunchBox, diningTable)",
+        "!isOpenDrawer(drawer)",
+        "isClosed(drawer)"
+      ],
+      "Plan": [
+        "navigate(robot, diningTable, drawer)",
+        "open(drawer, robot)",
+        "pick(robot, cloth, diningTable)",
+        "drop(robot, cloth, lunchBox)",
+        "close(drawer, robot)",
+        "pick(robot, apple, diningTable)",
+        "drop(robot, apple, lunchBox)",
+        "placeOnTop(robot, lunchBox, diningTable)"
+      ]
+    },
+    {
+      "Objects": {
+        "ROBOT": [
+          "robot"
+        ],
+        "FURNITURE_APPLIANCE": [
+          "diningTable",
+          "sideTable",
+          "drawer",
+          "microwave",
+          "stoveBurner"
+        ],
+        "HOUSEHOLD_OBJECT": [
+          "cloth",
+          "apple",
+          "banana",
+          "bowl",
+          "lunchBox"
+        ],
+        "STATE": [
+          "empty"
+        ]
+      },
+      "Predicates": [
+        "atRobot(FURNITURE_APPLIANCE)",
+        "supports(FURNITURE_APPLIANCE, HOUSEHOLD_OBJECT)",
+        "holds(HOUSEHOLD_OBJECT)",
+        "isEmpty(STATE)",
+        "contains(HOUSEHOLD_OBJECT, HOUSEHOLD_OBJECT)"
+      ],
+      "Actions": [
+        {
+          "action": "navigate(robot: ROBOT, fromLocation: FURNITURE_APPLIANCE, toLocation: FURNITURE_APPLIANCE)",
+          "description": "Robot moves from one location to another.",
+          "preconditions": [
+            "atRobot(fromLocation)",
+            "!atRobot(toLocation)"
+          ],
+          "effects": [
+            "!atRobot(fromLocation)",
+            "atRobot(toLocation)"
+          ]
+        },
+        {
+          "action": "pickup(robot: ROBOT, item: HOUSEHOLD_OBJECT, location: FURNITURE_APPLIANCE, state: STATE)",
+          "description": "Robot picks up an item from a location.",
+          "preconditions": [
+            "atRobot(location)",
+            "supports(location, item)",
+            "isEmpty(state)"
+          ],
+          "effects": [
+            "!supports(location, item)",
+            "holds(item)",
+            "!isEmpty(state)"
+          ]
+        },
+        {
+          "action": "place(robot: ROBOT, item: HOUSEHOLD_OBJECT, location: FURNITURE_APPLIANCE, state: STATE)",
+          "description": "Robot places an item at a location.",
+          "preconditions": [
+            "holds(item)",
+            "atRobot(location)"
+          ],
+          "effects": [
+            "supports(location, item)",
+            "!holds(item)",
+            "isEmpty(state)"
+          ]
+        },
+        {
+          "action": "putIn(robot: ROBOT, item: HOUSEHOLD_OBJECT, container: HOUSEHOLD_OBJECT, state: STATE)",
+          "description": "Robot puts an item into a container.",
+          "preconditions": [
+            "holds(item)"
+          ],
+          "effects": [
+            "contains(container, item)",
+            "!holds(item)",
+            "isEmpty(state)"
+          ]
+        }
+      ],
+      "InitialStates": [
+        "atRobot(diningTable)",
+        "supports(diningTable, apple)",
+        "supports(diningTable, banana)",
+        "supports(diningTable, cloth)",
+        "supports(sideTable, bowl)",
+        "supports(drawer, lunchBox)",
+        "isEmpty(empty)"
+      ],
+      "GoalStates": [
+        "contains(bowl, apple)",
+        "contains(bowl, banana)",
+        "supports(diningTable, bowl)",
+        "contains(lunchBox, cloth)",
+        "supports(drawer, lunchBox)"
+      ],
+      "Plan": [
+        "navigate(robot, diningTable, sideTable)",
+        "pickup(robot, bowl, sideTable, empty)",
+        "navigate(robot, sideTable, diningTable)",
+        "place(robot, bowl, diningTable, empty)",
+        "pickup(robot, apple, diningTable, empty)",
+        "putIn(robot, apple, bowl, empty)",
+        "pickup(robot, banana, diningTable, empty)",
+        "putIn(robot, banana, bowl, empty)",
+        "navigate(robot, diningTable, drawer)",
+        "pickup(robot, cloth, diningTable, empty)",
+        "putIn(robot, cloth, lunchBox, empty)"
+      ]
+    }
+  ]}

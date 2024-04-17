@@ -1,0 +1,40 @@
+(define (domain logistic)
+    (:requirements :disjunctive-preconditions :equality :existential-preconditions :strips :typing)
+    (:types CITY CityA CityB LOCATION LocationA1 LocationA2 LocationB1 LocationB2 PACKAGE PLANE Package1 Package2 Plane1 TRUCK TruckA TruckB)
+    (:predicates 
+    (atPackage ?Location - LOCATION ?Package - PACKAGE)  
+    (atPlane ?Airport - LOCATION ?Plane - PLANE)  
+    (atTruck ?Location - LOCATION ?Truck - TRUCK)  
+    (inPackagePlane ?Package - PACKAGE ?Plane - PLANE)  
+    (inPackageTruck ?Package - PACKAGE ?Truck - TRUCK))
+    (:action drive
+        :parameters (?FromLocation - LOCATION ?Truck - TRUCK ?ToLocation - LOCATION)
+        :precondition (atTruck ?FromLocation ?Truck)
+        :effect (and (not (atTruck ?FromLocation ?Truck)) (atTruck ?ToLocation ?Truck))
+    )
+     (:action fly
+        :parameters (?FromCity - LOCATION ?Plane - PLANE ?ToCity - LOCATION)
+        :precondition (atPlane ?FromCity ?Plane)
+        :effect (and (not (atPlane ?FromCity ?Plane)) (atPlane ?ToCity ?Plane))
+    )
+     (:action loadPlane
+        :parameters (?Package - PACKAGE ?Truck - TRUCK ?Airport - LOCATION ?Plane - PLANE)
+        :precondition (and (inPackageTruck ?Package ?Truck) (atTruck ?Airport ?Truck) (atPlane ?Airport ?Plane))
+        :effect (and (not (inPackageTruck ?Package ?Truck)) (inPackagePlane ?Package ?Plane))
+    )
+     (:action loadTruck
+        :parameters (?Location - LOCATION ?Package - PACKAGE ?Truck - TRUCK)
+        :precondition (and (atPackage ?Location ?Package) (atTruck ?Location ?Truck))
+        :effect (and (not (atPackage ?Location ?Package)) (inPackageTruck ?Package ?Truck))
+    )
+     (:action unloadLocation
+        :parameters (?Package - PACKAGE ?Truck - TRUCK ?Location - LOCATION)
+        :precondition (and (inPackageTruck ?Package ?Truck) (atTruck ?Location ?Truck))
+        :effect (and (not (inPackageTruck ?Package ?Truck)) (atPackage ?Location ?Package))
+    )
+     (:action unloadTruck
+        :parameters (?Package - PACKAGE ?Plane - PLANE ?Airport - LOCATION ?Truck - TRUCK)
+        :precondition (and (inPackagePlane ?Package ?Plane) (atPlane ?Airport ?Plane) (atTruck ?Airport ?Truck))
+        :effect (and (not (inPackagePlane ?Package ?Plane)) (inPackageTruck ?Package ?Truck))
+    )
+)
